@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using RestSharp;
+using Newtonsoft.Json.Linq;
 using System.Timers;
 
 namespace OpaProject
@@ -21,6 +23,8 @@ namespace OpaProject
     /// </summary>
     public partial class MainWindow : Window
     {
+        
+
         enum Grade
         {
             FirstGrade = 1,
@@ -47,7 +51,12 @@ namespace OpaProject
         {
             loading.Visibility = Visibility.Visible;
             login.Visibility = Visibility.Hidden;
-            Timer timer = new Timer(2000);
+
+            
+
+
+
+            Timer timer = new Timer(3000);
             timer.Elapsed += (_, e1) =>
             {
                 Dispatcher.Invoke(new Action(() =>
