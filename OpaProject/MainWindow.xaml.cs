@@ -75,8 +75,8 @@ namespace OpaProject
                 {
                     loading.Visibility = Visibility.Hidden;
                     login.Visibility = Visibility.Visible;
-                    if (check.Equals("False")) noticeText.Text = check;
-                    else noticeText.Text = check;
+                    if (check.Equals("False")) noticeText.Text = "로그인이 실패했습니다";
+                    else new MainDash(EmailBox.Text, PwBox.Password).Show();
                 }));
                 timer.Dispose();
             };
