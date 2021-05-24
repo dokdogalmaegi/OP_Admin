@@ -26,10 +26,10 @@
         </Rectangle>
         <Image Source="Assets/di.png" Width="90" Height="90" Margin="0,0,0,300" Effect="{DynamicResource MaterialDesignShadowDepth3}"/>
         <Grid Width="280" Height="288" VerticalAlignment="Top" Margin="35,104,35,0" x:Name="login">
-            <TextBlock Text="LOGIN" VerticalAlignment="top" HorizontalAlignment="Center" Margin="50" FontWeight="Bold" FontSize="20" Foreground="#333399" />
+            <TextBlock x:Name="noticeText" Text="LOGIN" VerticalAlignment="top" HorizontalAlignment="Center" Margin="50" FontWeight="Bold" FontSize="20" Foreground="#333399" />
             <StackPanel VerticalAlignment="Center" Margin="15,0,15,0" Height="100">
-                <TextBox materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="37" />
-                <PasswordBox materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                <TextBox x:Name="EmailBox" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="37" />
+                <PasswordBox x:Name="PwBox" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
 
             </StackPanel>
 
@@ -41,22 +41,20 @@
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <ComboBox Grid.Column="0" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}">
-                    <ComboBoxItem Content="1학년" Selected="firstGrade" />
-                    <ComboBoxItem Content="2학년" Selected="secondGrade"/>
-                    <ComboBoxItem Content="3학년" Selected="threeGrade"/>
+                    <ComboBoxItem Content="1학년" Selected="firstGrade" IsSelected="True" />
+                    <ComboBoxItem Content="2학년" Selected="secondGrade" />
+                    <ComboBoxItem Content="3학년" Selected="threeGrade" />
                 </ComboBox>
                 <ComboBox Grid.Column="2" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}">
-                    <ComboBoxItem Content="1반" Selected="firstClassNum"/>
-                    <ComboBoxItem Content="2반" Selected="secondClassNum"/>
-                    <ComboBoxItem Content="3반" Selected="threeClassNum"/>
-                    <ComboBoxItem Content="4반" Selected="fourClassNum"/>
+                    <ComboBoxItem Content="1반" Selected="firstClassNum" IsSelected="True" />
+                    <ComboBoxItem Content="2반" Selected="secondClassNum" />
+                    <ComboBoxItem Content="3반" Selected="threeClassNum" />
+                    <ComboBoxItem Content="4반" Selected="fourClassNum" />
                 </ComboBox>
             </Grid>
         </Grid>
-        <Grid x:Name="loading" Visibility="Hidden" Margin="0, 0, 70, 0">
-            <Image gif:ImageBehavior.AnimatedSource="Assets/test.gif"
-                   gif:ImageBehavior.AutoStart="True"
-                   gif:ImageBehavior.RepeatBehavior="1"/>
+        <Grid x:Name="loading" Visibility="Hidden" Margin="35, 0, 35, 0">
+            <ProgressBar Height="35" IsIndeterminate="True" />
         </Grid>
     </Grid>
 </Window>

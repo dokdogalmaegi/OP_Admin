@@ -121,13 +121,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\fast.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\di.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\test.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />

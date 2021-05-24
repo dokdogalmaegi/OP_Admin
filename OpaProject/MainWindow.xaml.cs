@@ -52,17 +52,31 @@ namespace OpaProject
             loading.Visibility = Visibility.Visible;
             login.Visibility = Visibility.Hidden;
 
-            
+            string url = "http://localhost:8000";
 
+            var client = new RestClient(url);
 
+            var req = new RestRequest("/checkTeacher", Method.POST);
+            req.AddJsonBody(new { email = EmailBox.Text, pw = PwBox.Password });
 
-            Timer timer = new Timer(3000);
+            req.AddHeader("Content-Type", "application/json");
+
+            IRestResponse res = client.Execute(req);
+            var content = res.Content;
+
+            var r = JObject.Parse(content);
+
+            var check = r["check"].ToString();
+
+            Timer timer = new Timer(2000);
             timer.Elapsed += (_, e1) =>
             {
                 Dispatcher.Invoke(new Action(() =>
                 {
                     loading.Visibility = Visibility.Hidden;
                     login.Visibility = Visibility.Visible;
+                    if (check.Equals("False")) noticeText.Text = check;
+                    else noticeText.Text = check;
                 }));
                 timer.Dispose();
             };
