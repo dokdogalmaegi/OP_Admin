@@ -18,27 +18,24 @@ using System.Timers;
 
 namespace OpaProject
 {
+    public enum Grade
+    {
+        FirstGrade = 1,
+        SecondGrade = 2,
+        ThreeGrade = 3
+    }
+    public enum ClassNum
+    {
+        FirstClass = 1,
+        SecondClass = 2,
+        ThreeClass = 3,
+        FourClass = 4
+    }
     /// <summary>
     /// MainWindow.xaml에 대한 상호 작용 논리
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-
-        enum Grade
-        {
-            FirstGrade = 1,
-            SecondGrade = 2,
-            ThreeGrade = 3
-        }
-        enum ClassNum
-        {
-            FirstClass = 1,
-            SecondClass = 2,
-            ThreeClass = 3,
-            FourClass = 4
-        }
-
         private Grade grade = Grade.FirstGrade;
         private ClassNum classNum = ClassNum.FirstClass;
 
@@ -47,12 +44,12 @@ namespace OpaProject
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
             loading.Visibility = Visibility.Visible;
             login.Visibility = Visibility.Hidden;
 
-            string url = "http://localhost:8000";
+            string url = "http://222.110.147.50:8000";
 
             var client = new RestClient(url);
 
@@ -61,7 +58,7 @@ namespace OpaProject
 
             req.AddHeader("Content-Type", "application/json");
 
-            IRestResponse res = client.Execute(req);
+            IRestResponse res = await client.ExecuteAsync(req);
             var content = res.Content;
 
             var r = JObject.Parse(content);
@@ -76,7 +73,11 @@ namespace OpaProject
                     loading.Visibility = Visibility.Hidden;
                     login.Visibility = Visibility.Visible;
                     if (check.Equals("False")) noticeText.Text = "로그인이 실패했습니다";
-                    else new MainDash(EmailBox.Text, PwBox.Password).Show();
+                    else
+                    {
+                        new MainDash(EmailBox.Text, PwBox.Password, grade, classNum).Show();
+                        Close();
+                    }
                 }));
                 timer.Dispose();
             };

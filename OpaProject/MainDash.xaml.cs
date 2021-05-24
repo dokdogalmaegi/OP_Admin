@@ -19,33 +19,34 @@ namespace OpaProject
     /// </summary>
     public partial class MainDash : Window
     {
-        enum Grade
-        {
-            FirstGrade = 1,
-            SecondGrade = 2,
-            ThreeGrade = 3
-        }
-        enum ClassNum
-        {
-            FirstClass = 1,
-            SecondClass = 2,
-            ThreeClass = 3,
-            FourClass = 4
-        }
-
         private string email { get; set; }
         private string pw { get; set; }
-        private Grade grade = Grade.FirstGrade;
-        private ClassNum classNum = ClassNum.FirstClass;
+        private Grade grade { get; set; }
+        private ClassNum classNum { get; set; }
 
-        public MainDash(string email, string pw)
+        public MainDash(string email, string pw, Grade grade, ClassNum classNum)
         {
+            this.email = email;
+            this.pw = pw;
+            this.grade = grade;
+            this.classNum = classNum;
+
             InitializeComponent();
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void allPage_Hidden(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void userInfo_Click(object sender, RoutedEventArgs e)
+        {
+            userInfo.Visibility = Visibility.Visible;
         }
     }
 }
