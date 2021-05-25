@@ -10,28 +10,28 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com">
 
     <Grid>
-        <Image Source="Assets/di.png" Margin="10,10,310,460" Effect="{DynamicResource MaterialDesignShadowDepth3}"/>
+        <Image Source="Assets/di.png" Margin="10,10,310,460" Effect="{DynamicResource MaterialDesignShadowDepth3}" />
         <Grid Width="280" Height="391" VerticalAlignment="Top" Margin="35,62,35,0" x:Name="login">
-            <TextBlock x:Name="noticeText" Text="로그인" VerticalAlignment="top" HorizontalAlignment="Center" Margin="10,10,120,0" FontWeight="Bold" FontSize="50" Foreground="#333399" />
+            <TextBlock x:Name="noticeText" Text="로그인" VerticalAlignment="top" HorizontalAlignment="Center" Margin="10,10,97,0" FontWeight="Bold" FontSize="50" Foreground="#333399" Width="173" />
             <StackPanel VerticalAlignment="Center" Margin="15,115,15,121" Height="155">
                 <TextBox x:Name="EmailBox" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="37" FontFamily="./#YANGJIN" />
                 <PasswordBox x:Name="PwBox" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0, 10, 0, 0" FontFamily="./#YANGJIN" />
 
             </StackPanel>
 
-            <Button VerticalAlignment="Top" Content="로그인"  Margin="17,238,15,0" Height="50" Effect="{DynamicResource MaterialDesignShadowDepth2}" Background="#FF7C38F5" Click="Button_Click" x:Name="loginBtn" />
+            <Button VerticalAlignment="Top" Content="로그인"  Margin="16.5,239,16.5,0" Height="50" Effect="{DynamicResource MaterialDesignShadowDepth2}" Background="#333399" Click="Button_Click" x:Name="loginBtn" />
             <Grid Margin="40, 260, 40, 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="8px"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <ComboBox Grid.Column="0" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}" Margin="-15,82,0,0">
+                <ComboBox Grid.Column="0" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}" Margin="-15,82,0,0" x:Name="gradeSelector" >
                     <ComboBoxItem Content="1학년" Selected="firstGrade" IsSelected="True" />
                     <ComboBoxItem Content="2학년" Selected="secondGrade" />
                     <ComboBoxItem Content="3학년" Selected="threeGrade" />
                 </ComboBox>
-                <ComboBox Grid.Column="2" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}" Margin="0,82,-15,0">
+                <ComboBox Grid.Column="2" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}" Margin="0,82,-15,0" x:Name="classSelector">
                     <ComboBoxItem Content="1반" Selected="firstClassNum" IsSelected="True" />
                     <ComboBoxItem Content="2반" Selected="secondClassNum" />
                     <ComboBoxItem Content="3반" Selected="threeClassNum" />
@@ -39,8 +39,8 @@
                 </ComboBox>
             </Grid>
         </Grid>
-        <Grid x:Name="loading" Visibility="Hidden" Margin="0, 0, 0, 0">
-            <ProgressBar Height="35" IsIndeterminate="True" />
+        <Grid x:Name="loading" Visibility="Visible" Margin="0, 0, 0, 0">
+            <ProgressBar x:Name="loadingBar" Height="9" Minimum="0" Maximum="100" Value="0" Margin="0,491,0,0" Foreground="#333399" Background="#bad6ff" />
         </Grid>
     </Grid>
 </Window>

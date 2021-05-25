@@ -46,8 +46,7 @@ namespace OpaProject
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            loading.Visibility = Visibility.Visible;
-            login.Visibility = Visibility.Hidden;
+            loginBtn.IsEnabled = false; gradeSelector.IsEnabled = false; classSelector.IsEnabled = false; EmailBox.IsEnabled = false; PwBox.IsEnabled = false; loginBtn.Content = "로그인 중";
 
             string url = "http://222.110.147.50:8000";
 
@@ -65,29 +64,36 @@ namespace OpaProject
 
             var check = r["check"].ToString();
             string name;
-            if (check.Equals("True")) name = r["name"].ToString();
+            if (check.Equals("True"))
+            {
+                name = r["name"].ToString();
+            }
             else name = "값이 없습니다.";
 
-            Timer timer = new Timer(2000);
+            Timer timer = new Timer(1);
             timer.Elapsed += (_, e1) =>
             {
                 Dispatcher.Invoke(new Action(() =>
                 {
-                    loading.Visibility = Visibility.Hidden;
-                    login.Visibility = Visibility.Visible;
-                    if (check.Equals("False"))
+                    if(loadingBar.Value >= 100)
                     {
-                        noticeText.Text = "로그인 실패";
-                        loginBtn.Content = "다시 로그인";
-                    }
-                    else
+                        timer.Dispose();
+                        if (check.Equals("False"))
+                        {
+                            noticeText.Text = "실패"; loginBtn.Content = "다시 로그인"; loginBtn.IsEnabled = true; gradeSelector.IsEnabled = true; classSelector.IsEnabled = true; EmailBox.IsEnabled = true; PwBox.IsEnabled = true; loadingBar.Value = 0;
+                        }
+                        else
+                        {
+                            new MainDash(EmailBox.Text, PwBox.Password, name, grade, classNum).Show();
+                            Close();
+                        }
+                    } else
                     {
-                        new MainDash(EmailBox.Text, PwBox.Password, name, grade, classNum).Show();
-                        Close();
+                        loadingBar.Value += 1;
                     }
                 }));
-                timer.Dispose();
             };
+
             timer.Start();
         }
 

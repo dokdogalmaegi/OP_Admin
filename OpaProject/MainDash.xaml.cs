@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,27 +22,27 @@ namespace OpaProject
     /// </summary>
     public partial class MainDash : Window
     {
-        private bool isExit = false;
         private string email { get; set; }
         private string pw { get; set; }
         private string name { get; set; }
-        private Grade grade { get; set; }
-        private ClassNum classNum { get; set; }
+        private Grade dashGrade { get; set; }
+        private ClassNum dashClass { get; set; }
+        private string url = "http://222.110.147.50:8000";
 
         NotifyIcon notify;
 
-        public MainDash(string email, string pw, string name, Grade grade, ClassNum classNum)
+        public MainDash(string email, string pw, string name, Grade dashGrade, ClassNum dashClass)
         {
             this.email = email;
             this.pw = pw;
             this.name = name;
-            this.grade = grade;
-            this.classNum = classNum;
+            this.dashGrade = dashGrade;
+            this.dashClass = dashClass;
 
             InitializeComponent();
 
             title.Text = "내 정보";
-            mainScreen.Children.Add(new UserInfo(name, email, grade, classNum));
+            mainScreen.Children.Add(new UserInfo(name, email, dashGrade, dashClass));
 
             Closing += MainDashClosing;
 
@@ -104,7 +106,56 @@ namespace OpaProject
         {
             mainScreen.Children.Clear();
             title.Text = "내 정보";
-            mainScreen.Children.Add(new UserInfo(name, email, grade, classNum));
+            mainScreen.Children.Add(new UserInfo(name, email, dashGrade, dashClass));
+        }
+        private async void userList_Click(object sender, RoutedEventArgs e)
+        {
+            var client = new RestClient(url);
+
+            var reqF = new RestRequest("/getClassNowNotLogs/csharp", Method.POST);
+            reqF.AddJsonBody(new { grade = (int) dashGrade, class_num = (int) dashClass });
+
+            reqF.AddHeader("Content-Type", "application/json");
+
+            IRestResponse resF = await client.ExecuteAsync(reqF);
+            var contentF = resF.Content;
+
+            var rFalse = JObject.Parse(contentF);
+
+            var listFalse = rFalse["Students"];
+
+            var reqT = new RestRequest("/getClassNowLogs/csharp", Method.POST);
+            reqT.AddJsonBody(new { grade = (int) dashGrade, class_num = (int) dashClass });
+
+            reqT.AddHeader("Content-Type", "application/json");
+
+            IRestResponse resT = await client.ExecuteAsync(reqT);
+            var contentT = resT.Content;
+
+            var rTrue = JObject.Parse(contentT);
+
+            var listTrue = rTrue["Students"];
+
+            List<Student> studentsTrue = new List<Student>();
+            List<Student> studentsFalse = new List<Student>();
+
+            foreach(var student in listTrue)
+            {
+                string onlineFlag = "오프라인";
+                if (student["onlineFlag"].ToString().Equals("true")) onlineFlag = "온라인";
+                studentsTrue.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), time = student["time"].ToString() });
+            }
+
+            foreach (var student in listFalse)
+            {
+                string onlineFlag = "오프라인";
+                if (student["onlineFlag"].ToString().Equals("true")) onlineFlag = "온라인";
+                studentsFalse.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), time = "출석 안함" });
+            }
+
+            mainScreen.Children.Clear();
+            title.Text = "출결 리스트";
+            mainScreen.Children.Add(new StudentList(studentsTrue, studentsFalse));
         }
     }
 }

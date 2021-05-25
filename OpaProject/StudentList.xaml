@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="OpaProject.StudentList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OpaProject"
+             mc:Ignorable="d" 
+             d:DesignHeight="850" d:DesignWidth="1350">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <TextBox x:Name="noticeText" Text="결석한 학생이 없습니다." FontSize="30" Margin="125,101,125,571" HorizontalAlignment="Center" BorderThickness="0" Visibility="Hidden" />
+            <Border HorizontalAlignment="Right" BorderBrush="#dbdbdb" BorderThickness="1" CornerRadius="3"/>
+            <ListView Name="StudentsFalse" HorizontalAlignment="Center" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="학년" Width="Auto" DisplayMemberBinding="{Binding grade}" ></GridViewColumn>
+                        <GridViewColumn Header="반" Width="Auto" DisplayMemberBinding="{Binding class_num}" ></GridViewColumn>
+                        <GridViewColumn Header="번호" Width="Auto" DisplayMemberBinding="{Binding num}" ></GridViewColumn>
+                        <GridViewColumn Header="이름" Width="Auto" DisplayMemberBinding="{Binding nm}" ></GridViewColumn>
+                        <GridViewColumn Header="수업" Width="Auto" DisplayMemberBinding="{Binding onlineFlag}" ></GridViewColumn>
+                        <GridViewColumn Header="핸드폰" Width="Auto" DisplayMemberBinding="{Binding phone}" ></GridViewColumn>
+                        <GridViewColumn Header="시간" Width="Auto" DisplayMemberBinding="{Binding time}"></GridViewColumn>
+                            
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+        <Grid Grid.Column="1">
+            <TextBox x:Name="noticeText2" Text="출석한 학생이 없습니다." FontSize="30" Margin="125,101,125,571" HorizontalAlignment="Center" BorderThickness="0" Visibility="Hidden" />
+            <ListView Name="StudentsTrue" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="학년" Width="Auto" DisplayMemberBinding="{Binding grade}" ></GridViewColumn>
+                        <GridViewColumn Header="반" Width="Auto" DisplayMemberBinding="{Binding class_num}" ></GridViewColumn>
+                        <GridViewColumn Header="번호" Width="Auto" DisplayMemberBinding="{Binding num}" ></GridViewColumn>
+                        <GridViewColumn Header="이름" Width="Auto" DisplayMemberBinding="{Binding nm}" ></GridViewColumn>
+                        <GridViewColumn Header="수업" Width="Auto" DisplayMemberBinding="{Binding onlineFlag}" ></GridViewColumn>
+                        <GridViewColumn Header="핸드폰" Width="Auto" DisplayMemberBinding="{Binding phone}" ></GridViewColumn>
+                        <GridViewColumn Header="시간" Width="Auto" DisplayMemberBinding="{Binding time}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </Grid>
+</UserControl>
