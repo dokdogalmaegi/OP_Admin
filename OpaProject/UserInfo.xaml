@@ -26,12 +26,13 @@
                 <TextBlock Text="" x:Name="emailText" TextBlock.VerticalAlignment="Center"/>
             </Border>
         </Grid>
-        <Grid Grid.Row="2" >
+        <Grid Grid.Row="2" Background="#F6F5F8"  >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="0" >
+                <Border HorizontalAlignment="Right" BorderBrush="#dbdbdb" BorderThickness="2" CornerRadius="3" Margin="0, 12, 0, 12"/>
                 <TextBlock Text="학년" FontSize="35" Margin="282,119,-282,-119" />
                 <materialDesign:PackIcon x:Name="schoolIcon" Kind="School" Width="50" Height="50" Margin="60,116,0,0" />
                 <materialDesign:PackIcon x:Name="gradeNum" Kind="Number0" Width="100" Height="100" Margin="200,93,0,0" />
