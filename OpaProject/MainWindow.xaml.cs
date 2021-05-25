@@ -64,6 +64,9 @@ namespace OpaProject
             var r = JObject.Parse(content);
 
             var check = r["check"].ToString();
+            string name;
+            if (check.Equals("True")) name = r["name"].ToString();
+            else name = "값이 없습니다.";
 
             Timer timer = new Timer(2000);
             timer.Elapsed += (_, e1) =>
@@ -72,10 +75,14 @@ namespace OpaProject
                 {
                     loading.Visibility = Visibility.Hidden;
                     login.Visibility = Visibility.Visible;
-                    if (check.Equals("False")) noticeText.Text = "로그인이 실패했습니다";
+                    if (check.Equals("False"))
+                    {
+                        noticeText.Text = "로그인 실패";
+                        loginBtn.Content = "다시 로그인";
+                    }
                     else
                     {
-                        new MainDash(EmailBox.Text, PwBox.Password, grade, classNum).Show();
+                        new MainDash(EmailBox.Text, PwBox.Password, name, grade, classNum).Show();
                         Close();
                     }
                 }));

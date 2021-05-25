@@ -20,9 +20,38 @@ namespace OpaProject
     /// </summary>
     public partial class UserInfo : UserControl
     {
-        public UserInfo()
+        public UserInfo(string name, string email, Grade grade, ClassNum classNum)
         {
             InitializeComponent();
+            emailText.Text = email;
+            teacherName.Text = name + " 선생님";
+            switch(grade)
+            {
+                case Grade.FirstGrade :
+                    gradeNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number1;
+                    break;
+                case Grade.SecondGrade :
+                    gradeNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number2;
+                    break;
+                case Grade.ThreeGrade :
+                    gradeNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number3;
+                    break;
+            }
+            switch (classNum)
+            {
+                case ClassNum.FirstClass :
+                    classNumNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number1;
+                    break;
+                case ClassNum.SecondClass :
+                    classNumNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number2;
+                    break;
+                case ClassNum.ThreeClass :
+                    classNumNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number3;
+                    break;
+                case ClassNum.FourClass :
+                    classNumNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number4;
+                    break;
+            }
         }
     }
 }

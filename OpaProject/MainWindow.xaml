@@ -10,42 +10,28 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com">
 
     <Grid>
-        <Rectangle Height="500" VerticalAlignment="Center" >
-            <Rectangle.Fill>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#ffffff" />
-                    <GradientStop Color="#333399" Offset="1" />
-                </LinearGradientBrush>
-
-            </Rectangle.Fill>
-
-        </Rectangle>
-
-        <Rectangle Width="280" Height="300" Fill="White" Effect="{DynamicResource MaterialDesignShadowDepth5}" RadiusX="13.667" RadiusY="13.667" >
-
-        </Rectangle>
-        <Image Source="Assets/di.png" Width="90" Height="90" Margin="0,0,0,300" Effect="{DynamicResource MaterialDesignShadowDepth3}"/>
-        <Grid Width="280" Height="288" VerticalAlignment="Top" Margin="35,104,35,0" x:Name="login">
-            <TextBlock x:Name="noticeText" Text="LOGIN" VerticalAlignment="top" HorizontalAlignment="Center" Margin="50" FontWeight="Bold" FontSize="20" Foreground="#333399" />
-            <StackPanel VerticalAlignment="Center" Margin="15,0,15,0" Height="100">
-                <TextBox x:Name="EmailBox" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="37" />
-                <PasswordBox x:Name="PwBox" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+        <Image Source="Assets/di.png" Margin="10,10,310,460" Effect="{DynamicResource MaterialDesignShadowDepth3}"/>
+        <Grid Width="280" Height="391" VerticalAlignment="Top" Margin="35,62,35,0" x:Name="login">
+            <TextBlock x:Name="noticeText" Text="로그인" VerticalAlignment="top" HorizontalAlignment="Center" Margin="10,10,120,0" FontWeight="Bold" FontSize="50" Foreground="#333399" />
+            <StackPanel VerticalAlignment="Center" Margin="15,115,15,121" Height="155">
+                <TextBox x:Name="EmailBox" materialDesign:HintAssist.Hint="Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="37" FontFamily="./#YANGJIN" />
+                <PasswordBox x:Name="PwBox" materialDesign:HintAssist.Hint="Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0, 10, 0, 0" FontFamily="./#YANGJIN" />
 
             </StackPanel>
 
-            <Button VerticalAlignment="Top" Content="로그인"  Margin="40,200,40,0" Height="37" Effect="{DynamicResource MaterialDesignShadowDepth2}" Background="#FF7C38F5" Click="Button_Click" />
-            <Grid Margin="40, 240, 40, 0">
+            <Button VerticalAlignment="Top" Content="로그인"  Margin="17,238,15,0" Height="50" Effect="{DynamicResource MaterialDesignShadowDepth2}" Background="#FF7C38F5" Click="Button_Click" x:Name="loginBtn" />
+            <Grid Margin="40, 260, 40, 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="8px"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <ComboBox Grid.Column="0" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}">
+                <ComboBox Grid.Column="0" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}" Margin="-15,82,0,0">
                     <ComboBoxItem Content="1학년" Selected="firstGrade" IsSelected="True" />
                     <ComboBoxItem Content="2학년" Selected="secondGrade" />
                     <ComboBoxItem Content="3학년" Selected="threeGrade" />
                 </ComboBox>
-                <ComboBox Grid.Column="2" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}">
+                <ComboBox Grid.Column="2" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}" Margin="0,82,-15,0">
                     <ComboBoxItem Content="1반" Selected="firstClassNum" IsSelected="True" />
                     <ComboBoxItem Content="2반" Selected="secondClassNum" />
                     <ComboBoxItem Content="3반" Selected="threeClassNum" />
@@ -53,7 +39,7 @@
                 </ComboBox>
             </Grid>
         </Grid>
-        <Grid x:Name="loading" Visibility="Hidden" Margin="35, 0, 35, 0">
+        <Grid x:Name="loading" Visibility="Hidden" Margin="0, 0, 0, 0">
             <ProgressBar Height="35" IsIndeterminate="True" />
         </Grid>
     </Grid>
