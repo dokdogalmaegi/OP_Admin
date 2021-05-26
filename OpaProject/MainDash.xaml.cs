@@ -33,6 +33,8 @@ namespace OpaProject
 
         public MainDash(string email, string pw, string name, Grade dashGrade, ClassNum dashClass)
         {
+            
+
             this.email = email;
             this.pw = pw;
             this.name = name;
@@ -56,7 +58,7 @@ namespace OpaProject
                 System.Windows.Forms.ContextMenu menu = new System.Windows.Forms.ContextMenu();
                 // 아이콘 설정부분
                 notify = new System.Windows.Forms.NotifyIcon();
-                notify.Icon = new System.Drawing.Icon(Path.Combine(Environment.CurrentDirectory, @"di.ico"));  // 외부아이콘 사용 시
+                notify.Icon = new System.Drawing.Icon(Path.Combine(Environment.CurrentDirectory, @"..\\..\\di.ico"));  // 외부아이콘 사용 시
                 notify.Visible = true;
                 notify.ContextMenu = menu;
                 notify.Text = "디지텍 출석부";
@@ -107,6 +109,12 @@ namespace OpaProject
             mainScreen.Children.Clear();
             title.Text = "내 정보";
             mainScreen.Children.Add(new UserInfo(name, email, dashGrade, dashClass));
+        }
+        private void userAdd_Click(object sender, RoutedEventArgs e)
+        {
+            mainScreen.Children.Clear();
+            title.Text = "학생 추가하기";
+            mainScreen.Children.Add(new StudentAdd());
         }
         private async void userList_Click(object sender, RoutedEventArgs e)
         {

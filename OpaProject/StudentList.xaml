@@ -24,7 +24,6 @@
                         <GridViewColumn Header="수업" Width="Auto" DisplayMemberBinding="{Binding onlineFlag}" ></GridViewColumn>
                         <GridViewColumn Header="핸드폰" Width="Auto" DisplayMemberBinding="{Binding phone}" ></GridViewColumn>
                         <GridViewColumn Header="시간" Width="Auto" DisplayMemberBinding="{Binding time}"></GridViewColumn>
-                            
                     </GridView>
                 </ListView.View>
             </ListView>
