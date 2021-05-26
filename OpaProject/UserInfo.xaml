@@ -37,21 +37,21 @@
                 <TextBlock Text="학년" FontSize="35" Margin="282,119,-282,-119" x:Name="GradeBox"/>
                 <materialDesign:PackIcon x:Name="schoolIcon" Kind="School" Width="50" Height="50" Margin="60,116,0,0" />
                 <materialDesign:PackIcon x:Name="gradeNum" Kind="Number0" Width="100" Height="100" Margin="200,93,0,0"/>
-                <Grid Visibility="Hidden" x:Name="AdminBox">
-                    <materialDesign:PackIcon Kind="AlphaA" Width="100" Height="100" Margin="150,93,0,0" />
-                    <materialDesign:PackIcon Kind="AlphaD" Width="100" Height="100" Margin="200,93,0,0" />
-                    <materialDesign:PackIcon Kind="AlphaM" Width="100" Height="100" Margin="250,93,0,0" />
-                    <materialDesign:PackIcon Kind="AlphaI" Width="100" Height="100" Margin="300,93,0,0" />
-                    <materialDesign:PackIcon Kind="AlphaN" Width="100" Height="100" Margin="350,93,0,0" />
-                    <materialDesign:PackIcon Kind="AlphaU" Width="100" Height="100" Margin="450,93,0,0" />
-                    <materialDesign:PackIcon Kind="AlphaS" Width="100" Height="100" Margin="500,93,0,0" />
-                    <materialDesign:PackIcon Kind="AlphaE" Width="100" Height="100" Margin="550,93,0,0" />
-                    <materialDesign:PackIcon Kind="AlphaR" Width="100" Height="100" Margin="600,93,0,0" />
-                </Grid>
             </Grid>
             <Grid Grid.Column="1">
                 <TextBlock Text="반" Margin="282,119,-282,-119" FontSize="35" x:Name="classNumText" />
                 <materialDesign:PackIcon x:Name="classNumNum" Kind="Number0" Width="100" Height="100" Margin="200,93,0,0" />
+            </Grid>
+            <Grid Visibility="Hidden" x:Name="AdminBox" Margin="250, 0, 0 ,0">
+                <materialDesign:PackIcon Kind="AlphaA" Width="100" Height="100" Margin="150,93,0,0" />
+                <materialDesign:PackIcon Kind="AlphaD" Width="100" Height="100" Margin="200,93,0,0" />
+                <materialDesign:PackIcon Kind="AlphaM" Width="100" Height="100" Margin="250,93,0,0" />
+                <materialDesign:PackIcon Kind="AlphaI" Width="100" Height="100" Margin="300,93,0,0" />
+                <materialDesign:PackIcon Kind="AlphaN" Width="100" Height="100" Margin="350,93,0,0" />
+                <materialDesign:PackIcon Kind="AlphaU" Width="100" Height="100" Margin="450,93,0,0" />
+                <materialDesign:PackIcon Kind="AlphaS" Width="100" Height="100" Margin="500,93,0,0" />
+                <materialDesign:PackIcon Kind="AlphaE" Width="100" Height="100" Margin="550,93,0,0" />
+                <materialDesign:PackIcon Kind="AlphaR" Width="100" Height="100" Margin="600,93,0,0" />
             </Grid>
         </Grid>
     </Grid>
