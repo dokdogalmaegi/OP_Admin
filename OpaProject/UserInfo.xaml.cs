@@ -38,9 +38,8 @@ namespace OpaProject
                     break;
                 case Grade.AllGrade :
                     GradeBox.Visibility = Visibility.Hidden; gradeNum.Visibility = Visibility.Hidden; BorderBox.Visibility = Visibility.Hidden; classNumText.Visibility = Visibility.Hidden; classNumNum.Visibility = Visibility.Hidden;
-                    Thickness thickness = schoolIcon.Margin;
-                    thickness.Left = 200;
-                    accountBox.Kind = MaterialDesignThemes.Wpf.PackIconKind.AccountStar; schoolIcon.Kind = MaterialDesignThemes.Wpf.PackIconKind.AccountTie; AdminBox.Visibility = Visibility.Visible; LeftBox.Width = new GridLength(3, GridUnitType.Star); schoolIcon.Margin = thickness;
+                    schoolIcon.Visibility = Visibility.Hidden;
+                    AdminBox.Visibility = Visibility.Visible; LeftBox.Width = new GridLength(3, GridUnitType.Star);
                     break;
             }
             switch (classNum)
