@@ -22,14 +22,16 @@ namespace OpaProject
     {
         FirstGrade = 1,
         SecondGrade = 2,
-        ThreeGrade = 3
+        ThreeGrade = 3,
+        AllGrade = 4
     }
     public enum ClassNum
     {
         FirstClass = 1,
         SecondClass = 2,
         ThreeClass = 3,
-        FourClass = 4
+        FourClass = 4,
+        AllClass = 5
     }
     /// <summary>
     /// MainWindow.xaml에 대한 상호 작용 논리
@@ -63,12 +65,64 @@ namespace OpaProject
             var r = JObject.Parse(content);
 
             var check = r["check"].ToString();
-            string name;
+            string name = "값이 없습니다.";
+            int resGrade;
+            int resClass;
+            int resPermission;
+
             if (check.Equals("True"))
             {
                 name = r["name"].ToString();
+                resPermission = (int)r["permission"];
+
+                if (resPermission > 0)
+                {
+                    if (r["grade"].ToString().Equals("") || r["class"].ToString().Equals(""))
+                    {
+                        resGrade = 4;
+                        resClass = 4;
+                    }
+                    else
+                    {
+                        resGrade = (int)r["grade"];
+                        resClass = (int)r["class"];
+                    }
+
+                    switch (resGrade)
+                    {
+                        case 1:
+                            grade = Grade.FirstGrade;
+                            break;
+                        case 2:
+                            grade = Grade.SecondGrade;
+                            break;
+                        case 3:
+                            grade = Grade.ThreeGrade;
+                            break;
+                        default:
+                            grade = Grade.AllGrade;
+                            break;
+                    }
+                    switch (resClass)
+                    {
+                        case 1:
+                            classNum = ClassNum.FirstClass;
+                            break;
+                        case 2:
+                            classNum = ClassNum.SecondClass;
+                            break;
+                        case 3:
+                            classNum = ClassNum.ThreeClass;
+                            break;
+                        case 4:
+                            classNum = ClassNum.FourClass;
+                            break;
+                        default:
+                            classNum = ClassNum.AllClass;
+                            break;
+                    }
+                }
             }
-            else name = "값이 없습니다.";
 
             Timer timer = new Timer(1);
             timer.Elapsed += (_, e1) =>

@@ -110,47 +110,63 @@ namespace OpaProject
         }
         private async void userList_Click(object sender, RoutedEventArgs e)
         {
-            var client = new RestClient(url);
-
-            var reqF = new RestRequest("/getClassNowNotLogs/csharp", Method.POST);
-            reqF.AddJsonBody(new { grade = (int) dashGrade, class_num = (int) dashClass });
-
-            reqF.AddHeader("Content-Type", "application/json");
-
-            IRestResponse resF = await client.ExecuteAsync(reqF);
-            var contentF = resF.Content;
-
-            var rFalse = JObject.Parse(contentF);
-
-            var listFalse = rFalse["Students"];
-
-            var reqT = new RestRequest("/getClassNowLogs/csharp", Method.POST);
-            reqT.AddJsonBody(new { grade = (int) dashGrade, class_num = (int) dashClass });
-
-            reqT.AddHeader("Content-Type", "application/json");
-
-            IRestResponse resT = await client.ExecuteAsync(reqT);
-            var contentT = resT.Content;
-
-            var rTrue = JObject.Parse(contentT);
-
-            var listTrue = rTrue["Students"];
-
             List<Student> studentsTrue = new List<Student>();
             List<Student> studentsFalse = new List<Student>();
+            var client = new RestClient(url);
 
-            foreach(var student in listTrue)
+            if ((int) dashGrade < 4)
             {
-                string onlineFlag = "오프라인";
-                if (student["onlineFlag"].ToString().Equals("true")) onlineFlag = "온라인";
-                studentsTrue.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), time = student["time"].ToString() });
+                var reqF = new RestRequest("/getClassNowNotLogs/csharp", Method.POST);
+                reqF.AddJsonBody(new { grade = (int)dashGrade, class_num = (int)dashClass });
+
+                reqF.AddHeader("Content-Type", "application/json");
+
+                IRestResponse resF = await client.ExecuteAsync(reqF);
+                var contentF = resF.Content;
+
+                var rFalse = JObject.Parse(contentF);
+
+                var listFalse = rFalse["Students"];
+
+                var reqT = new RestRequest("/getClassNowLogs/csharp", Method.POST);
+                reqT.AddJsonBody(new { grade = (int)dashGrade, class_num = (int)dashClass });
+
+                reqT.AddHeader("Content-Type", "application/json");
+
+                IRestResponse resT = await client.ExecuteAsync(reqT);
+                var contentT = resT.Content;
+
+                var rTrue = JObject.Parse(contentT);
+
+                var listTrue = rTrue["Students"];
+
+                foreach (var student in listTrue)
+                {
+                    string onlineFlag = "오프라인";
+                    if (student["onlineFlag"].ToString().Equals("true")) onlineFlag = "온라인";
+                    studentsTrue.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), time = student["time"].ToString() });
+                }
+
+                foreach (var student in listFalse)
+                {
+                    string onlineFlag = "오프라인";
+                    if (student["onlineFlag"].ToString().Equals("true")) onlineFlag = "온라인";
+                    studentsFalse.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), time = "출석 안함" });
+                }
             }
-
-            foreach (var student in listFalse)
+            else
             {
-                string onlineFlag = "오프라인";
-                if (student["onlineFlag"].ToString().Equals("true")) onlineFlag = "온라인";
-                studentsFalse.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), time = "출석 안함" });
+                var reqF = new RestRequest("/getClassNowNotLogs/csharp", Method.POST);
+                reqF.AddJsonBody(new { grade = (int)dashGrade, class_num = (int)dashClass });
+
+                reqF.AddHeader("Content-Type", "application/json");
+
+                IRestResponse resF = await client.ExecuteAsync(reqF);
+                var contentF = resF.Content;
+
+                var rFalse = JObject.Parse(contentF);
+
+                var listFalse = rFalse["Students"];
             }
 
             mainScreen.Children.Clear();
