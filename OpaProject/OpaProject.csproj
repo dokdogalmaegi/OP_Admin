@@ -163,6 +163,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="Font\yangGin.ttf" />
+    <None Include="excel\form.xlsx" />
     <None Include="excel\test.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

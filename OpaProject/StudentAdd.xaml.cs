@@ -88,6 +88,17 @@ namespace OpaProject
                 }
             }
         }
+        private void downloadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "엑셀 파일 (*.xlsx)|*.xlsx|엑셀 파일 (*.xls)|*.xls";
+            saveFileDialog.FileName = "*.xlsx";
+            saveFileDialog.InitialDirectory = @"C:\";
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                
+            }
+        }
         private async void insertBtn_Click(object sender, RoutedEventArgs e)
         {
             if(list.Count == 0)
