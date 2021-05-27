@@ -96,7 +96,9 @@ namespace OpaProject
             saveFileDialog.InitialDirectory = @"C:\";
             if (saveFileDialog.ShowDialog() == true)
             {
-                
+                FileStream fs = new FileStream(Path.Combine(Environment.CurrentDirectory, @"..\\..\\excel\from.xlsx"), FileMode.Open);
+                FileStream dest = new FileStream(saveFileDialog.FileName, FileMode.Create);
+                fs.CopyTo(dest);
             }
         }
         private async void insertBtn_Click(object sender, RoutedEventArgs e)
