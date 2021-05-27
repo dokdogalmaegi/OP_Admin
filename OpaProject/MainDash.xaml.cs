@@ -120,6 +120,13 @@ namespace OpaProject
             title.Text = "내 정보";
             mainScreen.Children.Add(new UserInfo(name, email, dashGrade, dashClass));
         }
+
+        private void userUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            mainScreen.Children.Clear();
+            title.Text = "학생 수정하기";
+            mainScreen.Children.Add(new UpdateStudent());
+        }
         private void userAdd_Click(object sender, RoutedEventArgs e)
         {
             mainScreen.Children.Clear();
