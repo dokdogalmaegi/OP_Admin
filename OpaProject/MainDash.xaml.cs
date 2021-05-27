@@ -20,8 +20,14 @@ namespace OpaProject
     /// <summary>
     /// MainDash.xaml에 대한 상호 작용 논리
     /// </summary>
+    public class Teacher
+    {
+        public string email { get; set; }
+        public string pw { get; set; }
+    }
     public partial class MainDash : Window
     {
+        
         private string email { get; set; }
         private string pw { get; set; }
         private string name { get; set; }
@@ -30,6 +36,7 @@ namespace OpaProject
         private string url = "http://222.110.147.50:8000";
 
         NotifyIcon notify;
+        Teacher teacher = new Teacher();
 
         public MainDash(string email, string pw, string name, Grade dashGrade, ClassNum dashClass)
         {
@@ -40,6 +47,9 @@ namespace OpaProject
             this.name = name;
             this.dashGrade = dashGrade;
             this.dashClass = dashClass;
+
+            teacher.email = email;
+            teacher.pw = pw;
 
             InitializeComponent();
 
@@ -114,7 +124,7 @@ namespace OpaProject
         {
             mainScreen.Children.Clear();
             title.Text = "학생 추가하기";
-            mainScreen.Children.Add(new StudentAdd());
+            mainScreen.Children.Add(new StudentAdd(teacher));
         }
         private async void userList_Click(object sender, RoutedEventArgs e)
         {

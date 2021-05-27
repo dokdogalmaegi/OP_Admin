@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:OpaProject"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1350">
@@ -29,7 +30,18 @@
             </ListView>
         </Grid>
         <Grid Grid.Column="1">
-            <Button Content="추가" Background="#333399" Click="openBtn_Click" Margin="200"></Button>
+            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left"
+                    BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Click="openBtn_Click" Margin="10, 10, 0, 650">
+                <StackPanel Margin="-5">
+                    <materialDesign:PackIcon Kind="PlusThick"/>
+                </StackPanel>
+            </Button>
+            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left"
+                    BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Click="insertBtn_Click" Margin="100, 10, 0, 650">
+                <StackPanel Margin="-5">
+                    <materialDesign:PackIcon Kind="AccountMultipleAdd"/>
+                </StackPanel>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>
