@@ -17,6 +17,7 @@ using Microsoft.Win32;
 using OfficeOpenXml;
 using RestSharp;
 using Newtonsoft.Json.Linq;
+using Path = System.IO.Path;
 
 namespace OpaProject
 {
@@ -92,11 +93,11 @@ namespace OpaProject
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "엑셀 파일 (*.xlsx)|*.xlsx|엑셀 파일 (*.xls)|*.xls";
-            saveFileDialog.FileName = "*.xlsx";
+            saveFileDialog.FileName = "양식.xlsx";
             saveFileDialog.InitialDirectory = @"C:\";
             if (saveFileDialog.ShowDialog() == true)
             {
-                FileStream fs = new FileStream(Path.Combine(Environment.CurrentDirectory, @"..\\..\\excel\from.xlsx"), FileMode.Open);
+                FileStream fs = new FileStream(Path.Combine(Environment.CurrentDirectory, @"..\\..\\excel\form.xlsx"), FileMode.Open);
                 FileStream dest = new FileStream(saveFileDialog.FileName, FileMode.Create);
                 fs.CopyTo(dest);
             }
