@@ -6,40 +6,43 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:OpaProject"
              mc:Ignorable="d" 
-             d:DesignHeight="650" d:DesignWidth="1120">
+             d:DesignHeight="650" d:DesignWidth="1300">
     <Grid Background="White">
-        <Grid.RowDefinitions >
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="1*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <materialDesign:PackIcon Kind="AccountEdit" Height="93" Width="93"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3.26*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <TextBox x:Name="noticeText" Text="추가한 학생이 없습니다." FontSize="30" Margin="125,101,125,571" HorizontalAlignment="Center" BorderThickness="0" Visibility="Hidden" />
+            <Border HorizontalAlignment="Right" BorderBrush="#dbdbdb" BorderThickness="1" CornerRadius="3"/>
+            <ListView Name="StudentList" HorizontalAlignment="Center" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="이메일" Width="Auto" DisplayMemberBinding="{Binding email}" ></GridViewColumn>
+                        <GridViewColumn Header="비밀번호" Width="Auto" DisplayMemberBinding="{Binding pw}" ></GridViewColumn>
+                        <GridViewColumn Header="이름" Width="Auto" DisplayMemberBinding="{Binding nm}" ></GridViewColumn>
+                        <GridViewColumn Header="학년" Width="Auto" DisplayMemberBinding="{Binding grade}" ></GridViewColumn>
+                        <GridViewColumn Header="반" Width="Auto" DisplayMemberBinding="{Binding class_num}" ></GridViewColumn>
+                        <GridViewColumn Header="번호" Width="Auto" DisplayMemberBinding="{Binding num}" ></GridViewColumn>
+                        <GridViewColumn Header="핸드폰" Width="Auto" DisplayMemberBinding="{Binding phone}"></GridViewColumn>
+                        <GridViewColumn Header="온라인수업" Width="Auto" DisplayMemberBinding="{Binding flag}"></GridViewColumn>
+                        <GridViewColumn Header="바뀔 이메일" Width="Auto" DisplayMemberBinding="{Binding changeEmail}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
-        <Grid Grid.Row="1">
-            <materialDesign:PackIcon Kind="AccountEdit" Height="93" Width="93"/>
-        </Grid>
-        <Grid Grid.Row="2">
-            <materialDesign:PackIcon Kind="AccountEdit" Height="93" Width="93"/>
-        </Grid>
-        <Grid Grid.Row="3">
-            <materialDesign:PackIcon Kind="AccountEdit" Height="93" Width="93"/>
-        </Grid>
-        <Grid Grid.Row="4">
-            <materialDesign:PackIcon Kind="AccountEdit" Height="93" Width="93"/>
-        </Grid>
-        <Grid Grid.Row="5">
-            <materialDesign:PackIcon Kind="AccountEdit" Height="93" Width="93"/>
-        </Grid>
-        <Grid Grid.Row="6">
-            <materialDesign:PackIcon Kind="AccountEdit" Height="93" Width="93"/>
-        </Grid>
-        <Grid Grid.Row="7">
-            <materialDesign:PackIcon Kind="AccountEdit" Height="93" Width="93"/>
+        <Grid Grid.Column="1">
+            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Click="downloadBtn_Click" Width="45" Height="45" Margin="10,-27,0,646">
+                <materialDesign:PackIcon Kind="FileDownload" Height="30" Width="30" Foreground="#ffffff"/>
+            </Button>
+            <Grid Margin="91,10,56,10">
+                <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Click="openBtn_Click" Width="120" Height="120" Margin="10,115,0,395">
+                    <materialDesign:PackIcon Kind="PlusThick" Height="85" Width="85" Foreground="#ffffff"/>
+                </Button>
+                <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Click="updateBtn_Click" Width="120" Height="120" VerticalAlignment="Center" Margin="10,366,0,144" >
+                    <materialDesign:PackIcon Kind="Edit" Height="75" Width="75" Foreground="#ffffff" />
+                </Button>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

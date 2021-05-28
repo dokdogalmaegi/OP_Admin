@@ -70,20 +70,26 @@ namespace OpaProject
 
                     for (int i = 0; i < noOfRow; i++)
                     {
-                        insertStudent vo = new insertStudent();
-                        vo.email = workSheet.GetValue(row, 1).ToString();
-                        if (workSheet.GetValue(row, 2) == null) vo.pw = "";
-                        else vo.pw = workSheet.GetValue(row, 2).ToString();
-                        vo.nm = workSheet.GetValue(row, 3).ToString();
-                        vo.grade = Convert.ToInt32(workSheet.GetValue(row, 4));
-                        vo.class_num = Convert.ToInt32(workSheet.GetValue(row, 5));
-                        vo.num = Convert.ToInt32(workSheet.GetValue(row, 6));
-                        if (workSheet.GetValue(row, 7) == null) vo.phone = "";
-                        else vo.phone = workSheet.GetValue(row, 7).ToString();
+                        try
+                        {
+                            insertStudent vo = new insertStudent();
+                            vo.email = workSheet.GetValue(row, 1).ToString();
+                            if (workSheet.GetValue(row, 2) == null) vo.pw = "";
+                            else vo.pw = workSheet.GetValue(row, 2).ToString();
+                            vo.nm = workSheet.GetValue(row, 3).ToString();
+                            vo.grade = Convert.ToInt32(workSheet.GetValue(row, 4));
+                            vo.class_num = Convert.ToInt32(workSheet.GetValue(row, 5));
+                            vo.num = Convert.ToInt32(workSheet.GetValue(row, 6));
+                            if (workSheet.GetValue(row, 7) == null) vo.phone = "";
+                            else vo.phone = workSheet.GetValue(row, 7).ToString();
 
-                        row++;
+                            row++;
 
-                        list.Add(vo);
+                            list.Add(vo);
+                        } catch (Exception eee)
+                        {
+
+                        }
                     }
                     StudentList.ItemsSource = list;
                 }
