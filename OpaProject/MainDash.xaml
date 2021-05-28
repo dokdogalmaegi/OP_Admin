@@ -33,9 +33,9 @@
                         </ListViewItem>
                         <ListViewItem HorizontalAlignment="Center" Margin="0">
                             <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left"
-                             BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Click="userUpdate_Click">
+                             BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Click="userList_Click">
                                 <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="AccountEdit"/>
+                                    <materialDesign:PackIcon Kind="AccountDetails"/>
                                 </StackPanel>
                             </Button>
                         </ListViewItem>
@@ -49,17 +49,18 @@
                         </ListViewItem>
                         <ListViewItem HorizontalAlignment="Center" Margin="0">
                             <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left"
-                             BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Click="userList_Click">
+                             BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Click="userDelete_Click">
                                 <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="AccountDetails"/>
+                                    <materialDesign:PackIcon Kind="AccountMultipleMinus"/>
                                 </StackPanel>
                             </Button>
+                            
                         </ListViewItem>
                         <ListViewItem HorizontalAlignment="Center" Margin="0 10">
                             <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left"
-                             BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black">
+                             BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Click="userUpdate_Click">
                                 <StackPanel Margin="-5">
-                                    <materialDesign:PackIcon Kind="ChatTyping"/>
+                                    <materialDesign:PackIcon Kind="AccountEdit"/>
                                 </StackPanel>
                             </Button>
                         </ListViewItem>

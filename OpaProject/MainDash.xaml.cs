@@ -246,6 +246,12 @@ namespace OpaProject
             title.Text = "학생 추가하기";
             mainScreen.Children.Add(new StudentAdd(teacher));
         }
+        private void userDelete_Click(object sender, RoutedEventArgs e)
+        {
+            title.Text = "학생 삭제하기";
+            mainScreen.Children.Clear();
+            mainScreen.Children.Add(new StudentDelete(teacher));
+        }
         private async void userList_Click(object sender, RoutedEventArgs e)
         {
             List<Student> studentsTrue = new List<Student>();

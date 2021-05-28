@@ -106,6 +106,9 @@
     <Compile Include="StudentAdd.xaml.cs">
       <DependentUpon>StudentAdd.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StudentDelete.xaml.cs">
+      <DependentUpon>StudentDelete.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StudentList.xaml.cs">
       <DependentUpon>StudentList.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="StudentAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StudentDelete.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -170,6 +177,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <Resource Include="Font\yangGin.ttf" />
+    <None Include="excel\delete.xlsx" />
     <None Include="excel\edit.xlsx" />
     <None Include="excel\form.xlsx" />
     <None Include="packages.config" />
