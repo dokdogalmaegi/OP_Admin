@@ -25,6 +25,7 @@ namespace OpaProject
         public string email { get; set; }
         public string pw { get; set; }
     }
+
     public partial class MainDash : Window
     {
         
@@ -33,12 +34,17 @@ namespace OpaProject
         private string name { get; set; }
         private Grade dashGrade { get; set; }
         private ClassNum dashClass { get; set; }
+        private int grade { get; set; }
+        private int classNum { get; set; }
+        private bool admin = false;
         private string url = "http://222.110.147.50:8000";
+        private List<Student> reqTrue;
+        private List<Student> reqFalse;
 
         NotifyIcon notify;
         Teacher teacher = new Teacher();
 
-        public MainDash(string email, string pw, string name, Grade dashGrade, ClassNum dashClass)
+        public MainDash(string email, string pw, string name, Grade dashGrade, ClassNum dashClass, bool admin)
         {
             
 
@@ -47,6 +53,10 @@ namespace OpaProject
             this.name = name;
             this.dashGrade = dashGrade;
             this.dashClass = dashClass;
+            this.admin = admin;
+
+            this.grade = (int)dashGrade;
+            this.classNum = (int)dashClass;
 
             teacher.email = email;
             teacher.pw = pw;
@@ -54,7 +64,7 @@ namespace OpaProject
             InitializeComponent();
 
             title.Text = "내 정보";
-            mainScreen.Children.Add(new UserInfo(name, email, dashGrade, dashClass));
+            mainScreen.Children.Add(new UserInfo(name, email, dashGrade, dashClass, admin));
 
             Closing += MainDashClosing;
 
@@ -65,8 +75,7 @@ namespace OpaProject
         {
             List<Student> studentsTrue = new List<Student>();
             var client = new RestClient(url);
-            var reqT = new RestRequest("/getClassNowLogs/csharp", Method.POST);
-            reqT.AddJsonBody(new { grade = (int)dashGrade, class_num = (int)dashClass });
+            var reqT = new RestRequest("/getNowLogs/csharp", Method.POST);
 
             reqT.AddHeader("Content-Type", "application/json");
 
@@ -90,10 +99,8 @@ namespace OpaProject
         {
             List<Student> studentsFalse = new List<Student>();
             var client = new RestClient(url);
-            var reqT = new RestRequest("/getClassNowLogs/csharp", Method.POST);
 
-            var reqF = new RestRequest("/getClassNowNotLogs/csharp", Method.POST);
-            reqF.AddJsonBody(new { grade = (int)dashGrade, class_num = (int)dashClass });
+            var reqF = new RestRequest("/getNowNotLogs/csharp", Method.POST);
 
             reqF.AddHeader("Content-Type", "application/json");
 
@@ -113,7 +120,16 @@ namespace OpaProject
 
             return studentsFalse;
         }
-
+        private List<Student> getStudentsTrues(List<Student> trueStudents, string grade, string classNum)
+        {
+            var studentsTrues = trueStudents.Where(s => s.grade.Contains(grade.ToString()) && s.class_num.Contains(classNum.ToString()));
+            return studentsTrues.ToList();
+        }
+        private List<Student> getStudentsFalses(List<Student> falseStudents, string grade, string classNum)
+        {
+            var studentsFalses = falseStudents.Where(s => s.grade.Contains(grade.ToString()) && s.class_num.Contains(classNum.ToString()));
+            return studentsFalses.ToList();
+        }
         private void MainDashLoaded(object sender, RoutedEventArgs e)
         {
             try
@@ -144,6 +160,44 @@ namespace OpaProject
 
             }
         }
+
+        private void updateStudent(List<Student> studentsTrue, List<Student> studentsFalse)
+        {
+            mainScreen.Children.Clear();
+            mainScreen.Children.Add(new StudentList(studentsTrue, studentsFalse));
+        }
+        private void selectedUpdate()
+        {
+            List<Student> studentsTrue;
+            List<Student> studentsFalse;
+            if(grade != 4 && classNum != 5)
+            {
+                studentsTrue = getStudentsTrues(reqTrue, grade.ToString(), classNum.ToString());
+                studentsFalse = getStudentsFalses (reqFalse, grade.ToString(), classNum.ToString());
+            }
+            else if (grade != 4)
+            {
+                var studentsTrues = reqTrue.Where(s => s.grade.Contains(grade.ToString()));
+                var studentsFalses = reqFalse.Where(s => s.grade.Contains(grade.ToString()));
+
+                studentsTrue = studentsTrues.ToList();
+                studentsFalse = studentsFalses.ToList();
+            }
+            else if (classNum != 5)
+            {
+                var studentsTrues = reqTrue.Where(s => s.class_num.Contains(classNum.ToString()));
+                var studentsFalses = reqFalse.Where(s => s.class_num.Contains(classNum.ToString()));
+
+                studentsTrue = studentsTrues.ToList();
+                studentsFalse = studentsFalses.ToList();
+            }
+            else
+            {
+                studentsTrue = reqTrue;
+                studentsFalse = reqFalse;
+            }
+            updateStudent(studentsTrue, studentsFalse);
+        }
         private void MainDashClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             WindowState = WindowState.Minimized;
@@ -170,19 +224,25 @@ namespace OpaProject
         private void userInfo_Click(object sender, RoutedEventArgs e)
         {
             mainScreen.Children.Clear();
+            NameBox.Visibility = Visibility.Hidden;
+            selectGrid.Visibility = Visibility.Hidden;
             title.Text = "내 정보";
-            mainScreen.Children.Add(new UserInfo(name, email, dashGrade, dashClass));
+            mainScreen.Children.Add(new UserInfo(name, email, dashGrade, dashClass, admin));
         }
 
         private void userUpdate_Click(object sender, RoutedEventArgs e)
         {
             mainScreen.Children.Clear();
+            NameBox.Visibility = Visibility.Hidden;
+            selectGrid.Visibility = Visibility.Hidden;
             title.Text = "학생 수정하기";
             mainScreen.Children.Add(new UpdateStudent(teacher));
         }
         private void userAdd_Click(object sender, RoutedEventArgs e)
         {
             mainScreen.Children.Clear();
+            NameBox.Visibility = Visibility.Hidden;
+            selectGrid.Visibility = Visibility.Hidden;
             title.Text = "학생 추가하기";
             mainScreen.Children.Add(new StudentAdd(teacher));
         }
@@ -190,57 +250,91 @@ namespace OpaProject
         {
             List<Student> studentsTrue = new List<Student>();
             List<Student> studentsFalse = new List<Student>();
-            var client = new RestClient(url);
+
+            reqTrue = await getStudentTrue();
+            reqFalse = await getStudentFalse();
+
+            if (admin)
+            {
+                NameBox.Visibility = Visibility.Visible;
+                selectGrid.Visibility = Visibility.Visible;
+
+                allGradeSel.IsSelected = true;
+                allClassSel.IsSelected = true;
+            }
 
             if ((int) dashGrade < 4)
             {
-                studentsTrue = await getStudentTrue();
-                studentsFalse = await getStudentFalse();
+                studentsTrue = getStudentsTrues(reqTrue, grade.ToString(), classNum.ToString());
+                studentsFalse = getStudentsFalses(reqFalse, grade.ToString(), classNum.ToString());
             }
             else
             {
-                var reqF = new RestRequest("/getNowNotLogs/csharp", Method.POST);
-                reqF.AddJsonBody(new { grade = (int)dashGrade, class_num = (int)dashClass });
-
-                reqF.AddHeader("Content-Type", "application/json");
-
-                IRestResponse resF = await client.ExecuteAsync(reqF);
-                var contentF = resF.Content;
-
-                var rFalse = JObject.Parse(contentF);
-
-                var listFalse = rFalse["Students"];
-
-                var reqT = new RestRequest("/getNowLogs/csharp", Method.POST);
-                reqT.AddJsonBody(new { grade = (int)dashGrade, class_num = (int)dashClass });
-
-                reqT.AddHeader("Content-Type", "application/json");
-
-                IRestResponse resT = await client.ExecuteAsync(reqT);
-                var contentT = resT.Content;
-
-                var rTrue = JObject.Parse(contentT);
-
-                var listTrue = rTrue["Students"];
-
-                foreach (var student in listTrue)
-                {
-                    string onlineFlag = "오프라인";
-                    if (student["onlineFlag"].ToString().Equals("true")) onlineFlag = "온라인";
-                    studentsTrue.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), time = student["time"].ToString() });
-                }
-
-                foreach (var student in listFalse)
-                {
-                    string onlineFlag = "오프라인";
-                    if (student["onlineFlag"].ToString().Equals("true")) onlineFlag = "온라인";
-                    studentsFalse.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), time = "출석 안함" });
-                }
+                studentsTrue = reqTrue;
+                studentsFalse = reqFalse;
             }
-
-            mainScreen.Children.Clear();
             title.Text = "출결 리스트";
-            mainScreen.Children.Add(new StudentList(studentsTrue, studentsFalse));
+            updateStudent(studentsTrue, studentsFalse);
+        }
+        private async void allGrade(object sender, RoutedEventArgs e)
+        {
+            this.dashGrade = Grade.AllGrade;
+            grade = (int)this.dashGrade;
+            selectedUpdate();
+                
+        }
+        private void firstGrade(object sender, RoutedEventArgs e)
+        {
+            this.dashGrade = Grade.FirstGrade;
+            grade = (int)this.dashGrade;
+            selectedUpdate();
+        }
+
+        private void secondGrade(object sender, RoutedEventArgs e)
+        {
+            this.dashGrade = Grade.SecondGrade;
+            grade = (int)this.dashGrade;
+            selectedUpdate();
+        }
+
+        private void threeGrade(object sender, RoutedEventArgs e)
+        {
+            this.dashGrade = Grade.ThreeGrade;
+            grade = (int)this.dashGrade;
+            selectedUpdate();
+        }
+        private async void allClassNum(object sender, RoutedEventArgs e)
+        {
+            this.dashClass = ClassNum.AllClass;
+            classNum = (int)this.dashClass;
+            selectedUpdate();
+        }
+        private void firstClassNum(object sender, RoutedEventArgs e)
+        {
+            this.dashClass = ClassNum.FirstClass;
+            classNum = (int)this.dashClass;
+            selectedUpdate();
+        }
+
+        private void secondClassNum(object sender, RoutedEventArgs e)
+        {
+            this.dashClass = ClassNum.SecondClass;
+            classNum = (int)this.dashClass;
+            selectedUpdate();
+        }
+
+        private void threeClassNum(object sender, RoutedEventArgs e)
+        {
+            this.dashClass = ClassNum.ThreeClass;
+            classNum = (int)this.dashClass;
+            selectedUpdate();
+        }
+
+        private void fourClassNum(object sender, RoutedEventArgs e)
+        {
+            this.dashClass = ClassNum.FourClass;
+            classNum = (int)this.dashClass;
+            selectedUpdate();
         }
     }
 }

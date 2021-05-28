@@ -40,6 +40,7 @@ namespace OpaProject
     {
         private Grade grade = Grade.FirstGrade;
         private ClassNum classNum = ClassNum.FirstClass;
+        private Boolean admin = false;
 
         public MainWindow()
         {
@@ -80,7 +81,8 @@ namespace OpaProject
                     if (r["grade"].ToString().Equals("") || r["class"].ToString().Equals(""))
                     {
                         resGrade = 4;
-                        resClass = 4;
+                        resClass = 5;
+                        admin = true;
                     }
                     else
                     {
@@ -138,7 +140,7 @@ namespace OpaProject
                         }
                         else
                         {
-                            new MainDash(EmailBox.Text, PwBox.Password, name, grade, classNum).Show();
+                            new MainDash(EmailBox.Text, PwBox.Password, name, grade, classNum, admin).Show();
                             Close();
                         }
                     } else

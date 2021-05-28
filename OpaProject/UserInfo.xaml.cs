@@ -20,42 +20,47 @@ namespace OpaProject
     /// </summary>
     public partial class UserInfo : UserControl
     {
-        public UserInfo(string name, string email, Grade grade, ClassNum classNum)
+        public UserInfo(string name, string email, Grade grade, ClassNum classNum, bool admin)
         {
             InitializeComponent();
             emailText.Text = email;
             teacherName.Text = name + " 선생님";
-            switch(grade)
+
+            if(!admin)
             {
-                case Grade.FirstGrade :
-                    gradeNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number1;
-                    break;
-                case Grade.SecondGrade :
-                    gradeNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number2;
-                    break;
-                case Grade.ThreeGrade :
-                    gradeNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number3;
-                    break;
-                case Grade.AllGrade :
-                    GradeBox.Visibility = Visibility.Hidden; gradeNum.Visibility = Visibility.Hidden; BorderBox.Visibility = Visibility.Hidden; classNumText.Visibility = Visibility.Hidden; classNumNum.Visibility = Visibility.Hidden;
-                    schoolIcon.Visibility = Visibility.Hidden;
-                    AdminBox.Visibility = Visibility.Visible; LeftBox.Width = new GridLength(3, GridUnitType.Star);
-                    break;
+                switch (grade)
+                {
+                    case Grade.FirstGrade:
+                        gradeNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number1;
+                        break;
+                    case Grade.SecondGrade:
+                        gradeNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number2;
+                        break;
+                    case Grade.ThreeGrade:
+                        gradeNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number3;
+                        break;
+                }
+                switch (classNum)
+                {
+                    case ClassNum.FirstClass:
+                        classNumNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number1;
+                        break;
+                    case ClassNum.SecondClass:
+                        classNumNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number2;
+                        break;
+                    case ClassNum.ThreeClass:
+                        classNumNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number3;
+                        break;
+                    case ClassNum.FourClass:
+                        classNumNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number4;
+                        break;
+                }
             }
-            switch (classNum)
+            else
             {
-                case ClassNum.FirstClass :
-                    classNumNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number1;
-                    break;
-                case ClassNum.SecondClass :
-                    classNumNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number2;
-                    break;
-                case ClassNum.ThreeClass :
-                    classNumNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number3;
-                    break;
-                case ClassNum.FourClass :
-                    classNumNum.Kind = MaterialDesignThemes.Wpf.PackIconKind.Number4;
-                    break;
+                GradeBox.Visibility = Visibility.Hidden; gradeNum.Visibility = Visibility.Hidden; BorderBox.Visibility = Visibility.Hidden; classNumText.Visibility = Visibility.Hidden; classNumNum.Visibility = Visibility.Hidden;
+                schoolIcon.Visibility = Visibility.Hidden;
+                AdminBox.Visibility = Visibility.Visible; LeftBox.Width = new GridLength(3, GridUnitType.Star);
             }
         }
     }

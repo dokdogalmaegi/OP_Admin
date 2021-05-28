@@ -80,6 +80,27 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <TextBlock Text="" x:Name="title" TextAlignment="Center" VerticalAlignment="Center" FontSize="35" />
+                        <TextBox x:Name="NameBox" Visibility="Hidden" materialDesign:HintAssist.Hint="이름" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="37" Width="250" Margin="650, -45, 0, 0" />
+                        <Grid Margin="650, 40, 0, 0" x:Name="selectGrid" Width="250" Visibility="Hidden">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                                <ColumnDefinition Width="8px"></ColumnDefinition>
+                                <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Grid.Column="0" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}">
+                                <ComboBoxItem Content="전체" Selected="allGrade" x:Name="allGradeSel" />
+                                <ComboBoxItem Content="1학년" Selected="firstGrade" />
+                                <ComboBoxItem Content="2학년" Selected="secondGrade" />
+                                <ComboBoxItem Content="3학년" Selected="threeGrade" />
+                            </ComboBox>
+                            <ComboBox Grid.Column="2" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}">
+                                <ComboBoxItem Content="전체" Selected="allClassNum" x:Name="allClassSel"/>
+                                <ComboBoxItem Content="1반" Selected="firstClassNum"/>
+                                <ComboBoxItem Content="2반" Selected="secondClassNum" />
+                                <ComboBoxItem Content="3반" Selected="threeClassNum" />
+                                <ComboBoxItem Content="4반" Selected="fourClassNum" />
+                            </ComboBox>
+                        </Grid>
                     </Grid>
                     <Grid Grid.Row="1" x:Name="mainScreen">
                         <Grid.ColumnDefinitions>
