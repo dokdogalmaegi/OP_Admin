@@ -38,8 +38,8 @@ namespace OpaProject
         private int classNum { get; set; }
         private bool admin = false;
         private string url = "http://222.110.147.50:8000";
-        private List<Student> reqTrue;
-        private List<Student> reqFalse;
+        private List<Student> filterReqTrue; private List<Student> filterReqFalse;
+        private List<Student> reqTrue; private List<Student> reqFalse;
 
         NotifyIcon notify;
         Teacher teacher = new Teacher();
@@ -170,6 +170,7 @@ namespace OpaProject
         {
             List<Student> studentsTrue;
             List<Student> studentsFalse;
+
             if(grade != 4 && classNum != 5)
             {
                 studentsTrue = getStudentsTrues(reqTrue, grade.ToString(), classNum.ToString());
@@ -196,6 +197,8 @@ namespace OpaProject
                 studentsTrue = reqTrue;
                 studentsFalse = reqFalse;
             }
+
+            filterReqFalse = studentsFalse; filterReqTrue = studentsTrue;
             updateStudent(studentsTrue, studentsFalse);
         }
         private void MainDashClosing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -341,6 +344,14 @@ namespace OpaProject
             this.dashClass = ClassNum.FourClass;
             classNum = (int)this.dashClass;
             selectedUpdate();
+        }
+
+        private void NameBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var test1 = filterReqTrue.Where(s => s.nm.Contains(NameBox.Text));
+            var test2 = filterReqFalse.Where(s => s.nm.Contains(NameBox.Text));
+
+            updateStudent(test1.ToList(), test2.ToList());
         }
     }
 }

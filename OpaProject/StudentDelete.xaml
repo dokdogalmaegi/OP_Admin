@@ -23,15 +23,15 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Margin="3,0,-3,0">
             <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Click="downloadBtn_Click" Width="45" Height="45" Margin="10,-27,0,646">
                 <materialDesign:PackIcon Kind="FileDownload" Height="30" Width="30" Foreground="#ffffff"/>
             </Button>
             <Grid Margin="130,10, 90,10">
-                <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Click="openBtn_Click" Width="120" Height="120">
+                <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Click="openBtn_Click" Width="120" Height="120" Margin="37,255,0,255">
                     <materialDesign:PackIcon Kind="PlusThick" Height="85" Width="85" Foreground="#ffffff"/>
                 </Button>
-                <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Click="deleteBtn_Click" Width="120" Height="120" VerticalAlignment="Center" Margin="213,255, 0,255" >
+                <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Click="deleteBtn_Click" Width="120" Height="120" VerticalAlignment="Center" Margin="250,255,0,255" >
                     <materialDesign:PackIcon Kind="Delete" Height="75" Width="75" Foreground="#ffffff" />
                 </Button>
             </Grid>

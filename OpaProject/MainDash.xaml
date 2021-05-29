@@ -81,7 +81,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <TextBlock Text="" x:Name="title" TextAlignment="Center" VerticalAlignment="Center" FontSize="35" />
-                        <TextBox x:Name="NameBox" Visibility="Hidden" materialDesign:HintAssist.Hint="이름" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="37" Width="250" Margin="650, -45, 0, 0" />
+                        <TextBox x:Name="NameBox" Visibility="Hidden" materialDesign:HintAssist.Hint="이름" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="37" Width="250" Margin="650, -45, 0, 0" TextChanged="NameBox_TextChanged" />
                         <Grid Margin="650, 40, 0, 0" x:Name="selectGrid" Width="250" Visibility="Hidden">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.5*"></ColumnDefinition>
