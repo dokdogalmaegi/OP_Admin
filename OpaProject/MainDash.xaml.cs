@@ -4,27 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 
 namespace OpaProject
 {
     /// <summary>
     /// MainDash.xaml에 대한 상호 작용 논리
     /// </summary>
-    public class Teacher
-    {
-        public string email { get; set; }
-        public string pw { get; set; }
-    }
 
     public partial class MainDash : Window
     {
@@ -123,11 +112,13 @@ namespace OpaProject
         private List<Student> getStudentsTrues(List<Student> trueStudents, string grade, string classNum)
         {
             var studentsTrues = trueStudents.Where(s => s.grade.Contains(grade.ToString()) && s.class_num.Contains(classNum.ToString()));
+            if (NameBox.Text.Length > 0) studentsTrues = studentsTrues.Where(s => s.nm.Contains(NameBox.Text));
             return studentsTrues.ToList();
         }
         private List<Student> getStudentsFalses(List<Student> falseStudents, string grade, string classNum)
         {
             var studentsFalses = falseStudents.Where(s => s.grade.Contains(grade.ToString()) && s.class_num.Contains(classNum.ToString()));
+            if (NameBox.Text.Length > 0) studentsFalses = studentsFalses.Where(s => s.nm.Contains(NameBox.Text));
             return studentsFalses.ToList();
         }
         private void MainDashLoaded(object sender, RoutedEventArgs e)
@@ -178,27 +169,25 @@ namespace OpaProject
             }
             else if (grade != 4)
             {
-                var studentsTrues = reqTrue.Where(s => s.grade.Contains(grade.ToString()));
-                var studentsFalses = reqFalse.Where(s => s.grade.Contains(grade.ToString()));
-
-                studentsTrue = studentsTrues.ToList();
-                studentsFalse = studentsFalses.ToList();
+                studentsTrue = reqTrue.Where(s => s.grade.Contains(grade.ToString())).ToList();
+                studentsFalse = reqFalse.Where(s => s.grade.Contains(grade.ToString())).ToList();
             }
             else if (classNum != 5)
             {
-                var studentsTrues = reqTrue.Where(s => s.class_num.Contains(classNum.ToString()));
-                var studentsFalses = reqFalse.Where(s => s.class_num.Contains(classNum.ToString()));
-
-                studentsTrue = studentsTrues.ToList();
-                studentsFalse = studentsFalses.ToList();
+                studentsTrue = reqTrue.Where(s => s.class_num.Contains(classNum.ToString())).ToList();
+                studentsFalse = reqFalse.Where(s => s.class_num.Contains(classNum.ToString())).ToList();
             }
             else
             {
                 studentsTrue = reqTrue;
                 studentsFalse = reqFalse;
             }
-
             filterReqFalse = studentsFalse; filterReqTrue = studentsTrue;
+            if (NameBox.Text.Length > 0)
+            {
+                studentsTrue = studentsTrue.Where(s => s.nm.Contains(NameBox.Text)).ToList();
+                studentsFalse = studentsFalse.Where(s => s.nm.Contains(NameBox.Text)).ToList();
+            }
             updateStudent(studentsTrue, studentsFalse);
         }
         private void MainDashClosing(object sender, System.ComponentModel.CancelEventArgs e)

@@ -1,23 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using RestSharp;
 using Newtonsoft.Json.Linq;
 using System.Timers;
 
 namespace OpaProject
 {
+    public class Teacher
+    {
+        public string email { get; set; }
+        public string pw { get; set; }
+    }
+    public class Student
+    {
+        public string grade { get; set; }
+        public string class_num { get; set; }
+        public string num { get; set; }
+        public string nm { get; set; }
+        public string onlineFlag { get; set; }
+        public string phone { get; set; }
+        public string time { get; set; }
+
+    }
+    public class insertStudent
+    {
+        public string email { get; set; }
+        public string pw { get; set; }
+        public string nm { get; set; }
+        public int grade { get; set; }
+        public int class_num { get; set; }
+        public int num { get; set; }
+        public string phone { get; set; }
+    }
+    public class deleteStudent
+    {
+        public string email { get; set; }
+    }
     public enum Grade
     {
         FirstGrade = 1,
