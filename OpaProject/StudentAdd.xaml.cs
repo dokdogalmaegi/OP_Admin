@@ -68,7 +68,7 @@ namespace OpaProject
                             list.Add(vo);
                         } catch (Exception eee)
                         {
-
+                            Console.WriteLine(eee.Message);
                         }
                     }
                     StudentList.ItemsSource = list;

@@ -148,7 +148,7 @@ namespace OpaProject
             }
             catch (Exception ee)
             {
-
+                Console.WriteLine(ee.Message);
             }
         }
 
