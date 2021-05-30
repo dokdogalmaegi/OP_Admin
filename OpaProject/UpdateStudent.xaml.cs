@@ -31,7 +31,7 @@ namespace OpaProject
         }
 
         List<updateStudent> list = new List<updateStudent>();
-        private string url = "http://222.110.147.50:8000";
+        public const string URL = "http://222.110.147.50:8000";
         private Teacher teacher = new Teacher();
         public UpdateStudent(Teacher teacher)
         {
@@ -112,7 +112,7 @@ namespace OpaProject
             }
             else
             {
-                var client = new RestClient(url);
+                var client = new RestClient(URL);
                 string resultMsg = "";
 
                 foreach (updateStudent student in list)

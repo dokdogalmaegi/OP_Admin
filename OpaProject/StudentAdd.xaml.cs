@@ -19,7 +19,7 @@ namespace OpaProject
     {
         private Teacher teacher = new Teacher();
 
-        private string url = "http://222.110.147.50:8000";
+        public const string URL = "http://222.110.147.50:8000";
         List<insertStudent> list = new List<insertStudent>();
         public StudentAdd(Teacher teacher)
         {
@@ -96,7 +96,7 @@ namespace OpaProject
             }
             else
             {
-                var client = new RestClient(url);
+                var client = new RestClient(URL);
                 string resultMsg = "";
 
                 foreach (insertStudent student in list)

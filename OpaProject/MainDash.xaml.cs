@@ -26,7 +26,7 @@ namespace OpaProject
         private int grade { get; set; }
         private int classNum { get; set; }
         private bool admin = false;
-        private string url = "http://222.110.147.50:8000";
+        public const string URL = "http://222.110.147.50:8000";
         private List<Student> filterReqTrue; private List<Student> filterReqFalse;
         private List<Student> reqTrue; private List<Student> reqFalse;
 
@@ -63,7 +63,7 @@ namespace OpaProject
         private async Task<List<Student>> getStudentTrue()
         {
             List<Student> studentsTrue = new List<Student>();
-            var client = new RestClient(url);
+            var client = new RestClient(URL);
             var reqT = new RestRequest("/getNowLogs/csharp", Method.POST);
 
             reqT.AddHeader("Content-Type", "application/json");
@@ -87,7 +87,7 @@ namespace OpaProject
         private async Task<List<Student>> getStudentFalse()
         {
             List<Student> studentsFalse = new List<Student>();
-            var client = new RestClient(url);
+            var client = new RestClient(URL);
 
             var reqF = new RestRequest("/getNowNotLogs/csharp", Method.POST);
 

@@ -20,7 +20,7 @@ namespace OpaProject
         List<deleteStudent> list = new List<deleteStudent>();
         private Teacher teacher = new Teacher();
 
-        private string url = "http://222.110.147.50:8000";
+        public const string URL = "http://222.110.147.50:8000";
         public StudentDelete(Teacher teacher)
         {
             this.teacher = teacher;
@@ -88,7 +88,7 @@ namespace OpaProject
             }
             else
             {
-                var client = new RestClient(url);
+                var client = new RestClient(URL);
                 string resultMsg = "";
 
                 foreach (deleteStudent student in list)
