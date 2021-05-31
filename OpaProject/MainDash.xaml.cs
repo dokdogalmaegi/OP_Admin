@@ -27,7 +27,6 @@ namespace OpaProject
         private int classNum { get; set; }
         private bool admin = false;
         public const string URL = "http://222.110.147.50:8000";
-        private List<Student> filterReqTrue; private List<Student> filterReqFalse;
         private List<Student> reqTrue; private List<Student> reqFalse;
 
         NotifyIcon notify;
@@ -182,7 +181,6 @@ namespace OpaProject
                 studentsTrue = reqTrue;
                 studentsFalse = reqFalse;
             }
-            filterReqFalse = studentsFalse; filterReqTrue = studentsTrue;
             if (NameBox.Text.Length > 0)
             {
                 studentsTrue = studentsTrue.Where(s => s.nm.Contains(NameBox.Text)).ToList();
@@ -337,10 +335,7 @@ namespace OpaProject
 
         private void NameBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var test1 = filterReqTrue.Where(s => s.nm.Contains(NameBox.Text));
-            var test2 = filterReqFalse.Where(s => s.nm.Contains(NameBox.Text));
-
-            updateStudent(test1.ToList(), test2.ToList());
+            selectedUpdate();
         }
     }
 }
