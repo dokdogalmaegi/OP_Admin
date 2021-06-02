@@ -32,6 +32,19 @@ namespace OpaProject
         public int num { get; set; }
         public string phone { get; set; }
     }
+
+    public class updateStudent
+    {
+        public string email { get; set; }
+        public string pw { get; set; }
+        public string nm { get; set; }
+        public int grade { get; set; }
+        public int class_num { get; set; }
+        public int num { get; set; }
+        public string phone { get; set; }
+        public string flag { get; set; }
+        public string changeEmail { get; set; }
+    }
     public class deleteStudent
     {
         public string email { get; set; }

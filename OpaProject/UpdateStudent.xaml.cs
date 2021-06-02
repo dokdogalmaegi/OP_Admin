@@ -17,19 +17,6 @@ namespace OpaProject
     /// </summary>
     public partial class UpdateStudent : UserControl
     {
-        public class updateStudent
-        {
-            public string email { get; set; }
-            public string pw { get; set; }
-            public string nm { get; set; }
-            public int grade { get; set; }
-            public int class_num { get; set; }
-            public int num { get; set; }
-            public string phone { get; set; }
-            public string flag { get; set; }
-            public string changeEmail { get; set; }
-        }
-
         List<updateStudent> list = new List<updateStudent>();
         public const string URL = "http://222.110.147.50:8000";
         private Teacher teacher = new Teacher();
