@@ -78,7 +78,7 @@ namespace OpaProject
             {
                 string onlineFlag = "오프라인";
                 if (student["onlineFlag"].ToString().Equals("true")) onlineFlag = "온라인";
-                studentsTrue.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), time = student["time"].ToString() });
+                studentsTrue.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), time = student["time"].ToString(), email = student["email"].ToString() });
             }
 
             return studentsTrue;
@@ -103,7 +103,7 @@ namespace OpaProject
             {
                 string onlineFlag = "오프라인";
                 if (student["onlineFlag"].ToString().Equals("true")) onlineFlag = "온라인";
-                studentsFalse.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), time = "출석 안함" });
+                studentsFalse.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), email = student["email"].ToString(), time = "출석 안함" });
             }
 
             return studentsFalse;

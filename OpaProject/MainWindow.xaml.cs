@@ -20,6 +20,7 @@ namespace OpaProject
         public string onlineFlag { get; set; }
         public string phone { get; set; }
         public string time { get; set; }
+        public string email { get; set; }
 
     }
     public class insertStudent

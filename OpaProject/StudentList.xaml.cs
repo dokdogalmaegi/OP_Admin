@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace OpaProject
 {
@@ -11,7 +12,7 @@ namespace OpaProject
     /// </summary>
     public partial class StudentList : UserControl
     {
-        private List<deleteStudent> selectedStudent;
+        private List<deleteStudent> selectedStudent = new List<deleteStudent>();
         public StudentList(List<Student> studentsTrue, List<Student> studentsFalse)
         {
             InitializeComponent();
@@ -30,14 +31,21 @@ namespace OpaProject
             if(StudentsTrue.SelectedIndex != -1)
             {
                 // 아이템 클릭시 할 짓
-                MessageBox.Show("test");
+                if (selectedStudent.Any(s => s.email == ((Student)StudentsTrue.SelectedItem).email)) selectedStudent.Remove(new deleteStudent { email = ((Student)StudentsTrue.SelectedItem).email });
+                else selectedStudent.Add(new deleteStudent { email = ((Student)StudentsTrue.SelectedItem).email });
+                deleteStudents.ItemsSource = selectedStudent;
+                MessageBox.Show(((Student) StudentsTrue.SelectedItem).email);
             }
         }
         private void StudentsFalse_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (StudentsTrue.SelectedIndex != -1)
+            if (StudentsFalse.SelectedIndex != -1)
             {
                 // 아이템 클릭시 할 짓
+                if (selectedStudent.Contains(new deleteStudent { email = ((Student)StudentsFalse.SelectedItem).email })) selectedStudent.Remove(new deleteStudent { email = ((Student)StudentsFalse.SelectedItem).email });
+                else selectedStudent.Add(new deleteStudent { email = ((Student)StudentsFalse.SelectedItem).email });
+                deleteStudents.ItemsSource = selectedStudent;
+                MessageBox.Show(((Student)StudentsFalse.SelectedItem).email);
             }
         }
     }
