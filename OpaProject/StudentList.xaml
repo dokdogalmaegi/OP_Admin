@@ -8,8 +8,9 @@
              d:DesignHeight="850" d:DesignWidth="1350">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="675*" />
+            <ColumnDefinition Width="656*" />
+            <ColumnDefinition Width="19*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <TextBox x:Name="noticeText" Text="결석한 학생이 없습니다." FontSize="30" Margin="125,101,125,571" HorizontalAlignment="Center" BorderThickness="0" Visibility="Hidden" />
@@ -28,7 +29,7 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Grid.ColumnSpan="2">
             <TextBox x:Name="noticeText2" Text="출석한 학생이 없습니다." FontSize="30" Margin="125,101,125,571" HorizontalAlignment="Center" BorderThickness="0" Visibility="Hidden" />
             <ListView Name="StudentsTrue" >
                 <ListView.View>
@@ -44,7 +45,7 @@
                 </ListView.View>
             </ListView>
         </Grid>
-        <ListView Name="deleteStudents" Margin="484,381,0,0" Grid.Column="1">
+        <ListView Name="deleteStudents" Margin="484,381,0,0" Grid.Column="1" Grid.ColumnSpan="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="삭제할 이메일" Width="Auto" DisplayMemberBinding="{Binding email}" ></GridViewColumn>

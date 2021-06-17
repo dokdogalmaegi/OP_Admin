@@ -31,8 +31,10 @@ namespace OpaProject
             if(StudentsTrue.SelectedIndex != -1)
             {
                 // 아이템 클릭시 할 짓
-                if (selectedStudent.Any(s => s.email == ((Student)StudentsTrue.SelectedItem).email)) selectedStudent.Remove(new deleteStudent { email = ((Student)StudentsTrue.SelectedItem).email });
+                
+                if (selectedStudent.Any(s => s.email == ((Student)StudentsTrue.SelectedItem).email)) selectedStudent.Remove(selectedStudent.Find(s => s.email == ((Student)StudentsTrue.SelectedItem).email));
                 else selectedStudent.Add(new deleteStudent { email = ((Student)StudentsTrue.SelectedItem).email });
+                deleteStudents.Items.Refresh();
                 deleteStudents.ItemsSource = selectedStudent;
                 MessageBox.Show(((Student) StudentsTrue.SelectedItem).email);
             }
@@ -42,8 +44,9 @@ namespace OpaProject
             if (StudentsFalse.SelectedIndex != -1)
             {
                 // 아이템 클릭시 할 짓
-                if (selectedStudent.Contains(new deleteStudent { email = ((Student)StudentsFalse.SelectedItem).email })) selectedStudent.Remove(new deleteStudent { email = ((Student)StudentsFalse.SelectedItem).email });
+                if (selectedStudent.Any(s => s.email == ((Student)StudentsFalse.SelectedItem).email)) selectedStudent.Remove(selectedStudent.Find(s => s.email == ((Student)StudentsFalse.SelectedItem).email));
                 else selectedStudent.Add(new deleteStudent { email = ((Student)StudentsFalse.SelectedItem).email });
+                deleteStudents.Items.Refresh();
                 deleteStudents.ItemsSource = selectedStudent;
                 MessageBox.Show(((Student)StudentsFalse.SelectedItem).email);
             }
