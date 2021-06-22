@@ -13,6 +13,7 @@ namespace OpaProject
     public partial class StudentList : UserControl
     {
         private List<deleteStudent> selectedStudent = new List<deleteStudent>();
+        private bool addDeleteFlag = false;
         public StudentList(List<Student> studentsTrue, List<Student> studentsFalse)
         {
             InitializeComponent();
@@ -32,11 +33,19 @@ namespace OpaProject
             {
                 // 아이템 클릭시 할 짓
                 
-                if (selectedStudent.Any(s => s.email == ((Student)StudentsTrue.SelectedItem).email)) selectedStudent.Remove(selectedStudent.Find(s => s.email == ((Student)StudentsTrue.SelectedItem).email));
-                else selectedStudent.Add(new deleteStudent { email = ((Student)StudentsTrue.SelectedItem).email });
+                if (selectedStudent.Any(s => s.email == ((Student)StudentsTrue.SelectedItem).email))
+                {
+                    selectedStudent.Remove(selectedStudent.Find(s => s.email == ((Student)StudentsTrue.SelectedItem).email));
+                    MessageBox.Show(((Student)StudentsTrue.SelectedItem).email + "가 리스트에서 제거 되었습니다.");
+                }
+                    
+                else
+                {
+                    selectedStudent.Add(new deleteStudent { email = ((Student)StudentsTrue.SelectedItem).email });
+                    MessageBox.Show(((Student)StudentsTrue.SelectedItem).email + "가 리스트에서 추가 되었습니다.");
+                }
                 deleteStudents.Items.Refresh();
                 deleteStudents.ItemsSource = selectedStudent;
-                MessageBox.Show(((Student) StudentsTrue.SelectedItem).email);
             }
         }
         private void StudentsFalse_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -44,11 +53,18 @@ namespace OpaProject
             if (StudentsFalse.SelectedIndex != -1)
             {
                 // 아이템 클릭시 할 짓
-                if (selectedStudent.Any(s => s.email == ((Student)StudentsFalse.SelectedItem).email)) selectedStudent.Remove(selectedStudent.Find(s => s.email == ((Student)StudentsFalse.SelectedItem).email));
-                else selectedStudent.Add(new deleteStudent { email = ((Student)StudentsFalse.SelectedItem).email });
+                if (selectedStudent.Any(s => s.email == ((Student)StudentsFalse.SelectedItem).email))
+                {
+                    selectedStudent.Remove(selectedStudent.Find(s => s.email == ((Student)StudentsFalse.SelectedItem).email));
+                    MessageBox.Show(((Student)StudentsFalse.SelectedItem).email + "가 리스트에서 제거 되었습니다.");
+                }
+                else
+                {
+                    selectedStudent.Add(new deleteStudent { email = ((Student)StudentsFalse.SelectedItem).email });
+                    MessageBox.Show(((Student)StudentsFalse.SelectedItem).email + "가 리스트에서 추가 되었습니다.");
+                }
                 deleteStudents.Items.Refresh();
                 deleteStudents.ItemsSource = selectedStudent;
-                MessageBox.Show(((Student)StudentsFalse.SelectedItem).email);
             }
         }
     }
