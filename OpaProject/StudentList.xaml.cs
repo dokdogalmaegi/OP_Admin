@@ -13,7 +13,6 @@ namespace OpaProject
     public partial class StudentList : UserControl
     {
         private List<deleteStudent> selectedStudent = new List<deleteStudent>();
-        private bool addDeleteFlag = false;
         public StudentList(List<Student> studentsTrue, List<Student> studentsFalse)
         {
             InitializeComponent();
@@ -23,11 +22,11 @@ namespace OpaProject
             if (studentsFalse.Count() > 0) StudentsFalse.ItemsSource = studentsFalse;
             else noticeText.Visibility = Visibility.Visible;
 
-            StudentsTrue.MouseDoubleClick += StudentsTrue_MouseDoubleClick;
-            StudentsFalse.MouseDoubleClick += StudentsFalse_MouseDoubleClick;
+            StudentsTrue.MouseUp += StudentsTrue_MouseClick;
+            StudentsFalse.MouseUp += StudentsFalse_MouseClick;
         }
 
-        private void StudentsTrue_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void StudentsTrue_MouseClick(object sender, MouseButtonEventArgs e)
         {
             if(StudentsTrue.SelectedIndex != -1)
             {
@@ -48,7 +47,7 @@ namespace OpaProject
                 deleteStudents.ItemsSource = selectedStudent;
             }
         }
-        private void StudentsFalse_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void StudentsFalse_MouseClick(object sender, MouseButtonEventArgs e)
         {
             if (StudentsFalse.SelectedIndex != -1)
             {
