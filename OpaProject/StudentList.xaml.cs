@@ -1,3 +1,6 @@
+using Newtonsoft.Json.Linq;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -13,9 +16,18 @@ namespace OpaProject
     public partial class StudentList : UserControl
     {
         private List<deleteStudent> selectedStudent = new List<deleteStudent>();
-        public StudentList(List<Student> studentsTrue, List<Student> studentsFalse)
+        private List<Student> studentsTrue;
+        private List<Student> studentsFalse;
+        public const string URL = "http://222.110.147.50:8000";
+        private Teacher teacher { get; set; }
+
+        public StudentList(List<Student> studentsTrue, List<Student> studentsFalse, Teacher teacher)
         {
             InitializeComponent();
+
+            this.studentsTrue = studentsTrue;
+            this.studentsFalse = studentsFalse;
+            this.teacher = teacher;
 
             if (studentsTrue.Count() > 0) StudentsTrue.ItemsSource = studentsTrue;
             else noticeText2.Visibility = Visibility.Visible;
@@ -35,13 +47,13 @@ namespace OpaProject
                 if (selectedStudent.Any(s => s.email == ((Student)StudentsTrue.SelectedItem).email))
                 {
                     selectedStudent.Remove(selectedStudent.Find(s => s.email == ((Student)StudentsTrue.SelectedItem).email));
-                    MessageBox.Show(((Student)StudentsTrue.SelectedItem).email + "가 리스트에서 제거 되었습니다.");
+                    if (deleteStudents.Items.Count == 0) deleteStudents.Visibility = Visibility.Hidden;
                 }
                     
                 else
                 {
                     selectedStudent.Add(new deleteStudent { email = ((Student)StudentsTrue.SelectedItem).email });
-                    MessageBox.Show(((Student)StudentsTrue.SelectedItem).email + "가 리스트에서 추가 되었습니다.");
+                    deleteStudents.Visibility = Visibility.Visible;
                 }
                 deleteStudents.Items.Refresh();
                 deleteStudents.ItemsSource = selectedStudent;
@@ -55,16 +67,63 @@ namespace OpaProject
                 if (selectedStudent.Any(s => s.email == ((Student)StudentsFalse.SelectedItem).email))
                 {
                     selectedStudent.Remove(selectedStudent.Find(s => s.email == ((Student)StudentsFalse.SelectedItem).email));
-                    MessageBox.Show(((Student)StudentsFalse.SelectedItem).email + "가 리스트에서 제거 되었습니다.");
+                    if (deleteStudents.Items.Count == 0) deleteStudents.Visibility = Visibility.Hidden;
                 }
                 else
                 {
                     selectedStudent.Add(new deleteStudent { email = ((Student)StudentsFalse.SelectedItem).email });
-                    MessageBox.Show(((Student)StudentsFalse.SelectedItem).email + "가 리스트에서 추가 되었습니다.");
+                    deleteStudents.Visibility = Visibility.Visible;
                 }
                 deleteStudents.Items.Refresh();
                 deleteStudents.ItemsSource = selectedStudent;
             }
+        }
+
+        private async void delete_Click(object sender, RoutedEventArgs e)
+        {
+            var client = new RestClient(URL);
+            string resultMsg = "";
+
+            if(selectedStudent.Count == 0)
+            {
+                MessageBox.Show("삭제할 학생이 선택되지 않았습니다.");
+            }else
+            {
+                foreach (deleteStudent student in selectedStudent)
+                {
+                    var req = new RestRequest("/deleteStudent", Method.POST);
+                    req.AddHeader("Content-Type", "application/json");
+                    req.AddJsonBody(new { adminEmail = teacher.email, adminKey = teacher.pw, email = student.email });
+
+                    IRestResponse res = await client.ExecuteAsync(req);
+                    var content = res.Content;
+
+                    var r = JObject.Parse(content);
+
+                    string msg = r["msg"].ToString();
+
+                    resultMsg += string.Format("{0} | {1}\n", student.email, msg);
+                    if (studentsTrue.Any(s => s.email.Equals(student.email))) studentsTrue.Remove(studentsTrue.Find(s => s.email.Equals(student.email)));
+                    if (studentsFalse.Any(s => s.email.Equals(student.email))) studentsFalse.Remove(studentsFalse.Find(s => s.email.Equals(student.email)));
+                }
+                selectedStudent.Clear();
+
+                deleteStudents.Items.Refresh();
+                deleteStudents.ItemsSource = selectedStudent;
+                deleteStudents.Visibility = Visibility.Hidden;
+
+                StudentsTrue.Items.Refresh();
+                StudentsTrue.ItemsSource = studentsTrue;
+
+                StudentsFalse.Items.Refresh();
+                StudentsFalse.ItemsSource = studentsFalse;
+
+                MessageBox.Show(resultMsg, "알림 메시지");
+            }
+        }
+        private async void privateInsert_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("클릭!");
         }
     }
 }

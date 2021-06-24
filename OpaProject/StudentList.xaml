@@ -44,15 +44,18 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <ListView Name="deleteStudents" Margin="484,381,0,0" Grid.Column="1" Grid.ColumnSpan="2">
+            <ListView Name="deleteStudents" Margin="484,381,0,0" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Hidden">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="삭제할 이메일" Width="Auto" DisplayMemberBinding="{Binding email}" ></GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Width="50" Height="50" Margin="580,650,0,0">
+            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Width="50" Height="50" Margin="580,650,0,0" Click="delete_Click">
                 <materialDesign:PackIcon Kind="Delete" Height="25" Width="25" Foreground="#ffffff"/>
+            </Button>
+            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Width="50" Height="50" Margin="510,650,0,0" Click="privateInsert_Click">
+                <materialDesign:PackIcon Kind="AccountPlus" Height="25" Width="25" Foreground="#ffffff"/>
             </Button>
         </Grid>
         

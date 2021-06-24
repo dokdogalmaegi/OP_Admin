@@ -154,7 +154,7 @@ namespace OpaProject
         private void updateStudent(List<Student> studentsTrue, List<Student> studentsFalse)
         {
             mainScreen.Children.Clear();
-            mainScreen.Children.Add(new StudentList(studentsTrue, studentsFalse));
+            mainScreen.Children.Add(new StudentList(studentsTrue, studentsFalse, teacher));
         }
         private void selectedUpdate()
         {
