@@ -34,8 +34,6 @@ namespace OpaProject
 
         public MainDash(string email, string pw, string name, Grade dashGrade, ClassNum dashClass, bool admin)
         {
-            
-
             this.email = email;
             this.pw = pw;
             this.name = name;

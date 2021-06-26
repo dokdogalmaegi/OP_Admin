@@ -54,7 +54,7 @@
             <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Width="50" Height="50" Margin="580,650,0,0" Click="delete_Click">
                 <materialDesign:PackIcon Kind="Delete" Height="25" Width="25" Foreground="#ffffff"/>
             </Button>
-            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Width="50" Height="50" Margin="510,650,0,0" Click="privateInsert_Click">
+            <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Width="50" Height="50" Margin="510,650,0,0" Click="PrivateInsert_Click">
                 <materialDesign:PackIcon Kind="AccountPlus" Height="25" Width="25" Foreground="#ffffff"/>
             </Button>
         </Grid>

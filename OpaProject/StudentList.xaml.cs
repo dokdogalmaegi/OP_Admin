@@ -121,9 +121,9 @@ namespace OpaProject
                 MessageBox.Show(resultMsg, "알림 메시지");
             }
         }
-        private async void privateInsert_Click(object sender, RoutedEventArgs e)
+        private async void PrivateInsert_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("클릭!");
+            new UserInsertOne(teacher).Show();
         }
     }
 }
