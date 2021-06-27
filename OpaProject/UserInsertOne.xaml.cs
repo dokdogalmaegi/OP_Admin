@@ -24,12 +24,53 @@ namespace OpaProject
         public const string URL = "http://222.110.147.50:8000";
         private Grade grade { get; set; }
         private ClassNum classNum { get; set; }
+        private updateStudent updateStudent;
         private Teacher teacher = new Teacher();
-        public UserInsertOne(Teacher teacher)
+        private bool insertCheck = false;
+        public UserInsertOne(Teacher teacher, updateStudent updateStudent)
         {
+            if (!updateStudent.Equals(null))
+            {
+                insertCheck = true;
+
+                EmailBox.Text = updateStudent.changeEmail;
+                PwBox.Text = "";
+                NmBox.Text = updateStudent.nm;
+                switch(updateStudent.grade)
+                {
+                    case 1:
+                        gradeSelector.SelectedIndex = 0;
+                        break;
+                    case 2:
+                        gradeSelector.SelectedIndex = 1;
+                        break;
+                    case 3:
+                        gradeSelector.SelectedIndex = 2;
+                        break;
+                }
+                switch(updateStudent.class_num)
+                {
+                    case 1:
+                        classSelector.SelectedIndex = 0;
+                        break;
+                    case 2:
+                        classSelector.SelectedIndex = 1;
+                        break;
+                    case 3:
+                        classSelector.SelectedIndex = 2;
+                        break;
+                    case 4:
+                        classSelector.SelectedIndex = 3;
+                        break;
+                }
+                NumBox.Text = Convert.ToString(updateStudent.num);
+                PhoneBox.Text = updateStudent.phone;
+            }
+            else this.updateStudent = updateStudent;
             this.teacher.email = teacher.email;
             this.teacher.pw = teacher.pw;
             InitializeComponent();
+
         }
 
         private async void InsertStudent(object sender, RoutedEventArgs e)
@@ -37,50 +78,74 @@ namespace OpaProject
             var client = new RestClient(URL);
             bool error = false;
 
-            insertStudent student = new insertStudent();
-
-            if (EmailBox.Text.Length == 0)
+            if(insertCheck)
             {
-                MessageBox.Show("이메일을 입력해주세요.");
-                error = true;
+                insertStudent student = new insertStudent();
+
+                if (EmailBox.Text.Length == 0)
+                {
+                    MessageBox.Show("이메일을 입력해주세요.");
+                    error = true;
+                }
+                else student.email = EmailBox.Text;
+                if (PwBox.Text.Length == 0) student.pw = "";
+                else student.pw = PwBox.Text;
+                if (NmBox.Text.Length == 0)
+                {
+                    MessageBox.Show("이름을 입력해주세요.");
+                    error = true;
+                }
+                else student.nm = NmBox.Text;
+                student.grade = (int)this.grade;
+                student.class_num = (int)this.classNum;
+                if (NumBox.Text.Length == 0)
+                {
+                    MessageBox.Show("번호를 입력해주세요.");
+                    error = true;
+                }
+                else student.num = Convert.ToInt32(NumBox.Text);
+                if (PhoneBox.Text.Length == 0) student.phone = "";
+                else student.phone = PhoneBox.Text;
+
+                if (!error)
+                {
+                    var req = new RestRequest("/addStudent", Method.POST);
+                    req.AddHeader("Content-Type", "application/json");
+                    req.AddJsonBody(new { adminEmail = teacher.email, adminKey = teacher.pw, email = student.email, pw = student.pw, nm = student.nm, grade = student.grade, class_num = student.class_num, num = student.num, phone = student.phone });
+
+                    IRestResponse res = await client.ExecuteAsync(req);
+                    var content = res.Content;
+
+                    var r = JObject.Parse(content);
+
+                    string msg = r["msg"].ToString();
+
+                    string resultMsg = string.Format("{0} | {1}\n", student.email, msg);
+
+                    MessageBox.Show(resultMsg);
+                    Close();
+                }
             }
-            else student.email = EmailBox.Text;
-            if (PwBox.Text.Length == 0) student.pw = "";
-            else student.pw = PwBox.Text;
-            if (NmBox.Text.Length == 0)
+            else
             {
-                MessageBox.Show("이름을 입력해주세요.");
-                error = true;
-            }
-            else student.nm = NmBox.Text;
-            student.grade = (int) this.grade;
-            student.class_num = (int) this.classNum;
-            if (NumBox.Text.Length == 0)
-            {
-                MessageBox.Show("번호를 입력해주세요.");
-                error = true;
-            }
-            else student.num = Convert.ToInt32(NumBox.Text);
-            if (PhoneBox.Text.Length == 0) student.phone = "";
-            else student.phone = PhoneBox.Text;
+                if (!error)
+                {
+                    var req = new RestRequest("/addStudent", Method.POST);
+                    req.AddHeader("Content-Type", "application/json");
+                    req.AddJsonBody(new { adminEmail = teacher.email, adminKey = teacher.pw, changeEmail = updateStudent.changeEmail, pw = updateStudent.pw, nm = updateStudent.nm, grade = updateStudent.grade, class_num = updateStudent.class_num, num = updateStudent.num, phone = updateStudent.phone, flag = updateStudent.flag, email = updateStudent.email });
 
-            if(!error)
-            {
-                var req = new RestRequest("/addStudent", Method.POST);
-                req.AddHeader("Content-Type", "application/json");
-                req.AddJsonBody(new { adminEmail = teacher.email, adminKey = teacher.pw, email = student.email, pw = student.pw, nm = student.nm, grade = student.grade, class_num = student.class_num, num = student.num, phone = student.phone });
+                    IRestResponse res = await client.ExecuteAsync(req);
+                    var content = res.Content;
 
-                IRestResponse res = await client.ExecuteAsync(req);
-                var content = res.Content;
+                    var r = JObject.Parse(content);
 
-                var r = JObject.Parse(content);
+                    string msg = r["msg"].ToString();
 
-                string msg = r["msg"].ToString();
+                    string resultMsg = string.Format("{0} | {1}\n", updateStudent.email, msg);
 
-                string resultMsg = string.Format("{0} | {1}\n", student.email, msg);
-
-                MessageBox.Show(resultMsg);
-                Close();
+                    MessageBox.Show(resultMsg);
+                    Close();
+                }
             }
         }
 

@@ -35,7 +35,10 @@ namespace OpaProject
             else noticeText.Visibility = Visibility.Visible;
 
             StudentsTrue.MouseUp += StudentsTrue_MouseClick;
+            StudentsTrue.MouseDoubleClick += StudentsTrue_DoubleClick;
+
             StudentsFalse.MouseUp += StudentsFalse_MouseClick;
+            StudentsFalse.MouseDoubleClick += StudentsFalse_DoubleClick;
         }
 
         private void StudentsTrue_MouseClick(object sender, MouseButtonEventArgs e)
@@ -59,6 +62,24 @@ namespace OpaProject
                 deleteStudents.ItemsSource = selectedStudent;
             }
         }
+        private void StudentsTrue_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (StudentsTrue.SelectedIndex != -1)
+            {
+                // 아이템 클릭시 할 짓
+                updateStudent updateStudent = new updateStudent();
+                Student st = ((Student)StudentsTrue.SelectedItem);
+
+                updateStudent.changeEmail = st.email;
+                updateStudent.nm = st.nm;
+                updateStudent.grade = Convert.ToInt32(st.grade);
+                updateStudent.class_num = Convert.ToInt32(st.class_num);
+                updateStudent.num = Convert.ToInt32(st.num);
+                updateStudent.phone = st.phone;
+
+                new UserInsertOne(teacher, updateStudent).Show();
+            }
+        }
         private void StudentsFalse_MouseClick(object sender, MouseButtonEventArgs e)
         {
             if (StudentsFalse.SelectedIndex != -1)
@@ -76,6 +97,25 @@ namespace OpaProject
                 }
                 deleteStudents.Items.Refresh();
                 deleteStudents.ItemsSource = selectedStudent;
+            }
+        }
+        private void StudentsFalse_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (StudentsFalse.SelectedIndex != -1)
+            {
+                // 아이템 클릭시 할 짓
+                // 아이템 클릭시 할 짓
+                updateStudent updateStudent = new updateStudent();
+                Student st = ((Student)StudentsFalse.SelectedItem);
+
+                updateStudent.changeEmail = st.email;
+                updateStudent.nm = st.nm;
+                updateStudent.grade = Convert.ToInt32(st.grade);
+                updateStudent.class_num = Convert.ToInt32(st.class_num);
+                updateStudent.num = Convert.ToInt32(st.num);
+                updateStudent.phone = st.phone;
+
+                new UserInsertOne(teacher, updateStudent).Show();
             }
         }
 
@@ -123,7 +163,7 @@ namespace OpaProject
         }
         private async void PrivateInsert_Click(object sender, RoutedEventArgs e)
         {
-            new UserInsertOne(teacher).Show();
+            new UserInsertOne(teacher, new updateStudent()).Show();
         }
     }
 }
