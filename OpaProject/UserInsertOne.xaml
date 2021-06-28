@@ -109,7 +109,7 @@
         </Grid>
         <Grid Grid.Row="7">
             <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Width="40" Height="40" Margin="380, 0, 0, 5" Click="InsertStudent" >
-                <materialDesign:PackIcon Kind="AccountPlus" Height="20" Width="20" Foreground="#ffffff"/>
+                <materialDesign:PackIcon Kind="AccountPlus" Height="20" Width="20" Foreground="#ffffff" x:Name="insertUpdatebtn" />
             </Button>
         </Grid>
     </Grid>
