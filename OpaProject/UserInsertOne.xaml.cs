@@ -30,7 +30,7 @@ namespace OpaProject
         public UserInsertOne(Teacher teacher, updateStudent updateStudent)
         {
             InitializeComponent();
-            if (!updateStudent.Equals(null))
+            if (!(updateStudent == null))
             {
                 insertUpdatebtn.Kind = MaterialDesignThemes.Wpf.PackIconKind.Edit;
                 this.updateStudent = updateStudent;

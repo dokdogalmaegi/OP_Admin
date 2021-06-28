@@ -164,7 +164,7 @@ namespace OpaProject
         }
         private async void PrivateInsert_Click(object sender, RoutedEventArgs e)
         {
-            new UserInsertOne(teacher, new updateStudent()).Show();
+            new UserInsertOne(teacher, null).Show();
         }
     }
 }
