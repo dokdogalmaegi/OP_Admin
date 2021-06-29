@@ -37,6 +37,15 @@ namespace OpaProject
                 EmailBox.Text = updateStudent.changeEmail;
                 PwBox.Text = "";
                 NmBox.Text = updateStudent.nm;
+                switch(updateStudent.flag)
+                {
+                    case "온라인":
+                        onlineSelector.SelectedIndex = 0;
+                        break;
+                    case "오프라인":
+                        onlineSelector.SelectedIndex = 1;
+                        break;
+                }
                 switch(updateStudent.grade)
                 {
                     case 1:
@@ -67,7 +76,12 @@ namespace OpaProject
                 NumBox.Text = Convert.ToString(updateStudent.num);
                 PhoneBox.Text = updateStudent.phone;
             }
-            else insertCheck = true;
+            else
+            {
+                onlineSelector.IsEnabled = false;
+                offlineText.Visibility = Visibility.Visible;
+                insertCheck = true;
+            }
             this.teacher.email = teacher.email;
             this.teacher.pw = teacher.pw;
         }
@@ -185,11 +199,11 @@ namespace OpaProject
 
         private void onlineClass(object sender, RoutedEventArgs e)
         {
-            this.updateStudent.flag = "true";
+            if(!(this.updateStudent == null)) this.updateStudent.flag = "true";
         }
         private void offlineClass(object sender, RoutedEventArgs e)
         {
-            this.updateStudent.flag = "false";
+            if (!(this.updateStudent == null)) this.updateStudent.flag = "false";
         }
     }
 }

@@ -94,8 +94,9 @@
             </Grid>
             <ComboBox Grid.Column="1" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}" Height="37" Margin="0, 16, 5, 5" x:Name="onlineSelector">
                 <ComboBoxItem Content="온라인" Selected="onlineClass" />
-                <ComboBoxItem Content="오프라인" Selected="offlineClass" IsSelected="True" />
+                <ComboBoxItem Content="오프라인" Selected="offlineClass" />
             </ComboBox>
+            <TextBlock Grid.Column="1" Height="37" FontSize="14" VerticalAlignment="Center" x:Name="offlineText" Visibility="Hidden" Padding="0, 15, 0, 0">오프라인</TextBlock>
         </Grid>
         <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>

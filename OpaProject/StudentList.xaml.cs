@@ -76,6 +76,7 @@ namespace OpaProject
                 updateStudent.class_num = Convert.ToInt32(st.class_num);
                 updateStudent.num = Convert.ToInt32(st.num);
                 updateStudent.phone = st.phone;
+                updateStudent.flag = st.onlineFlag;
 
                 new UserInsertOne(teacher, updateStudent).Show();
             }
