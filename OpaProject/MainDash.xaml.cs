@@ -75,7 +75,7 @@ namespace OpaProject
             foreach (var student in listTrue)
             {
                 string onlineFlag = "오프라인";
-                if (student["onlineFlag"].ToString().Equals("true")) onlineFlag = "온라인";
+                if (student["onlineFlag"].ToString().Equals("True")) onlineFlag = "온라인";
                 studentsTrue.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), time = student["time"].ToString(), email = student["email"].ToString() });
             }
 
@@ -100,7 +100,7 @@ namespace OpaProject
             foreach (var student in listFalse)
             {
                 string onlineFlag = "오프라인";
-                if (student["onlineFlag"].ToString().Equals("true")) onlineFlag = "온라인";
+                if (student["onlineFlag"].ToString().Equals("True")) onlineFlag = "온라인";
                 studentsFalse.Add(new Student() { grade = student["grade"].ToString(), class_num = student["class"].ToString(), num = student["num"].ToString(), nm = student["nm"].ToString(), onlineFlag = onlineFlag, phone = student["phone"].ToString(), email = student["email"].ToString(), time = "출석 안함" });
             }
 
