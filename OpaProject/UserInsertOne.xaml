@@ -17,6 +17,7 @@
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
@@ -89,13 +90,26 @@
                 <ColumnDefinition Width="1*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
+                <materialDesign:PackIcon Kind="School" Width="35" Height="35" Margin="2, 12, 0, 0"/>
+            </Grid>
+            <ComboBox Grid.Column="1" VerticalAlignment="Top" Effect="{DynamicResource MaterialDesignShadowDepth2}" Height="37" Margin="0, 16, 5, 5" x:Name="onlineSelector">
+                <ComboBoxItem Content="온라인" Selected="onlineClass" />
+                <ComboBoxItem Content="오프라인" Selected="offlineClass" IsSelected="True" />
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.11*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
                 <materialDesign:PackIcon Kind="Numeric" Width="35" Height="35" Margin="2, 12, 0, 0"/>
             </Grid>
             <Grid Grid.Column="1">
                 <TextBox x:Name="NumBox" materialDesign:HintAssist.Hint="Number" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="37" FontFamily="./#YANGJIN" />
             </Grid>
         </Grid>
-        <Grid Grid.Row="6">
+        <Grid Grid.Row="7">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.11*"></ColumnDefinition>
                 <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -107,7 +121,7 @@
                 <TextBox x:Name="PhoneBox" materialDesign:HintAssist.Hint="Phone" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="37" FontFamily="./#YANGJIN" />
             </Grid>
         </Grid>
-        <Grid Grid.Row="7">
+        <Grid Grid.Row="8">
             <Button Style="{StaticResource MaterialDesignFloatingActionButton}" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="#333399" Foreground="Black" Width="40" Height="40" Margin="380, 0, 0, 5" Click="InsertStudent" >
                 <materialDesign:PackIcon Kind="AccountPlus" Height="20" Width="20" Foreground="#ffffff" x:Name="insertUpdatebtn" />
             </Button>

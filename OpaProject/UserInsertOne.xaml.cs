@@ -29,11 +29,11 @@ namespace OpaProject
         private bool insertCheck = false;
         public UserInsertOne(Teacher teacher, updateStudent updateStudent)
         {
+            this.updateStudent = updateStudent;
             InitializeComponent();
             if (!(updateStudent == null))
             {
                 insertUpdatebtn.Kind = MaterialDesignThemes.Wpf.PackIconKind.Edit;
-                this.updateStudent = updateStudent;
                 EmailBox.Text = updateStudent.changeEmail;
                 PwBox.Text = "";
                 NmBox.Text = updateStudent.nm;
@@ -131,7 +131,7 @@ namespace OpaProject
                 {
                     req = new RestRequest("/updateStudent", Method.POST);
                     req.AddHeader("Content-Type", "application/json");
-                    req.AddJsonBody(new { adminEmail = teacher.email, adminKey = teacher.pw, changeEmail = student.email, pw = student.pw, nm = student.nm, grade = student.grade, class_num = student.class_num, num = student.num, phone = student.phone, flag = updateStudent.flag, email = updateStudent.changeEmail });
+                    req.AddJsonBody(new { adminEmail = teacher.email, adminKey = teacher.pw, changeEmail = student.email, pw = student.pw, nm = student.nm, grade = student.grade, class_num = student.class_num, num = student.num, phone = student.phone, flag = this.updateStudent.flag, email = this.updateStudent.changeEmail });
 
                     IRestResponse res = await client.ExecuteAsync(req);
                     var content = res.Content;
@@ -181,6 +181,15 @@ namespace OpaProject
         private void fourClassNum(object sender, RoutedEventArgs e)
         {
             this.classNum = ClassNum.FourClass;
+        }
+
+        private void onlineClass(object sender, RoutedEventArgs e)
+        {
+            this.updateStudent.flag = "true";
+        }
+        private void offlineClass(object sender, RoutedEventArgs e)
+        {
+            this.updateStudent.flag = "false";
         }
     }
 }
